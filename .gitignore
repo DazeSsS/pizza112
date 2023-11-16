@@ -1,0 +1,9 @@
+# dependencies
+venv/
+node_modules/
+
+# cache
+__pycache__
+
+# database
+db.sqlite3
