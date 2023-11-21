@@ -1,0 +1,35 @@
+.alert {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  gap: 20px;
+  padding: 20px 0;
+  background-color: #E6E9E5;
+  border-radius: 30px;
+  width: 1185px;
+  margin: auto;
+  margin-top: 50px;
+  padding-left: 25px;
+}
+
+.alert__title {
+  font-family: Fira Mono;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 38px;
+  text-align: center;
+}
+
+.list__positions {
+  font-family: Fira Mono;
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 38px;
+  text-align: center;
+  list-style-type: none;
+}
+
+.alert__list {
+  display: flex;
+  justify-content: flex-start;
+}

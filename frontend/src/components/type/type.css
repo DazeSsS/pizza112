@@ -1,0 +1,51 @@
+.type {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #E6E9E5;
+  border-radius: 30px;
+  height: 160px;
+  width: 540px;
+}
+
+.type:hover {
+  animation: opacity 0.7s ease-in-out;
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+  
+  100% {
+    opacity: 1;
+  }
+}
+
+.type__link {
+  position: absolute;
+  z-index: 1;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.profile__logo {
+  padding-left: 480px;
+  padding-top: 10px;
+}
+
+.type__name {
+  font-family: Fira Mono;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 40px;
+  text-align: left;
+  padding-top: 5px;
+}
