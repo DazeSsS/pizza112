@@ -5,7 +5,7 @@ import Warning from '../components/warning/Warning';
 function Home()  {
   return (
     <>
-      <Header />
+      <Header view="home" />
       <Types />
       <Warning />
     </>
