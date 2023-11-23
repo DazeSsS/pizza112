@@ -2,55 +2,55 @@
     padding: 30px 0 150px;
   }
   
-  .header__row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    column-gap: 30px;
-  }
-  
-  .website__information {
-    display: flex;
-    align-items: center;
-    column-gap: 30px;
-  }
-  
-  .other{
-    font-family: Fira Mono;
-    font-size: 24px;
-    font-weight: 400;
-    line-height: 30px;
-    gap: 10px;
-    display:flex;
-    align-items: center;
-    color: black;
-    text-decoration:none;
-    min-width: 185px;
-    justify-content: center;
-  }
+.header__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 30px;
+}
 
-  .website__information span {
-    font-family: Fira Mono;
-    font-size: 24px;
-    font-weight: 400;
-    line-height: 30px;
-    text-align: left;
-  }
+.website__information {
+  display: flex;
+  align-items: center;
+  column-gap: 30px;
+}
   
-  .profile__information {
-    display: flex;
-    align-items: center;
-    column-gap: 30px;
-  }
+.other{
+  font-family: Fira Mono;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 30px;
+  gap: 10px;
+  display:flex;
+  align-items: center;
+  color: black;
+  text-decoration:none;
+  min-width: 185px;
+  justify-content: center;
+}
+
+.website__information span {
+  font-family: Fira Mono;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 30px;
+  text-align: left;
+}
   
-  .profile__information span {
-    font-family: Fira Mono;
-    font-size: 24px;
-    font-weight: 400;
-    line-height: 30px;
-    text-align: left;
+.profile__information {
+  display: flex;
+  align-items: center;
+  column-gap: 30px;
+}
   
-  }
+.profile__information span {
+  font-family: Fira Mono;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 30px;
+  text-align: left;
+  
+}
 .search {
   width: 705px;
   height: 45px;
@@ -66,9 +66,9 @@
   height:100%;
   background-color:#E6E9E5;
   border-radius: 30px;
-    font-family: Fira Mono;
-    font-size: 24px;
-    font-weight: 400;
-    line-height: 30px;
+  font-family: Fira Mono;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 30px;
   padding: 0 10px;
 }

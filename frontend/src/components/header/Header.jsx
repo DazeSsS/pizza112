@@ -4,6 +4,7 @@ import websiteLogo from './../../img/logo.svg';
 import profileLogo from './../../img/profileLogo.svg';
 import styles from './header.module.css';
 import orderLogo from './../../img/orderLogo.svg';
+import { Link } from 'react-router-dom';
 
 // У функции header теперь параметр view с 3 значениями: home, orders, employees: с тремя хедерами для разных страничек
 
@@ -47,13 +48,13 @@ function Header ({view}) {
     <header className="header">
         <div className="container">
           <div className="header__row">
-            <a className="website__information" href="/">
+            <Link className="website__information" to="/">
               <img src={websiteLogo} width="120px" height="120px" alt="WebsiteLogo"/>
-            </a>
-            <a className={styles.other} href={a}>
+            </Link>
+            <Link className={styles.other} to={a}>
               <img src={logo} width="28px" height="28px" alt=""/>
               <span>{text}</span>
-            </a>
+            </Link>
             <div className={styles.search}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 26 26" fill="none">
               <path d="M11.6667 5C15.3485 5 18.3333 7.98477 18.3333 11.6667M19.2117 19.2065L25 25M22.3333 11.6667C22.3333 17.5577 17.5577 22.3333 11.6667 22.3333C5.77563 22.3333 1 17.5577 1 11.6667C1 5.77563 5.77563 1 11.6667 1C17.5577 1 22.3333 5.77563 22.3333 11.6667Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
