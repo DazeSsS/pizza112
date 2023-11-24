@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 // У функции header теперь параметр view с 3 значениями: home, orders, employees: с тремя хедерами для разных страничек
 
-function Header ({view}) {
+const Header = ({view}) => {
   let logo;
   let text;
   let a;
@@ -45,7 +45,7 @@ function Header ({view}) {
       break;
   }
   return(
-    <header className="header">
+    <header className={styles.hheader}>
         <div className="container">
           <div className="header__row">
             <Link className="website__information" to="/">
@@ -56,9 +56,11 @@ function Header ({view}) {
               <span>{text}</span>
             </Link>
             <div className={styles.search}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 26 26" fill="none">
-              <path d="M11.6667 5C15.3485 5 18.3333 7.98477 18.3333 11.6667M19.2117 19.2065L25 25M22.3333 11.6667C22.3333 17.5577 17.5577 22.3333 11.6667 22.3333C5.77563 22.3333 1 17.5577 1 11.6667C1 5.77563 5.77563 1 11.6667 1C17.5577 1 22.3333 5.77563 22.3333 11.6667Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+              <button>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 26 26" fill="none">
+                  <path d="M11.6667 5C15.3485 5 18.3333 7.98477 18.3333 11.6667M19.2117 19.2065L25 25M22.3333 11.6667C22.3333 17.5577 17.5577 22.3333 11.6667 22.3333C5.77563 22.3333 1 17.5577 1 11.6667C1 5.77563 5.77563 1 11.6667 1C17.5577 1 22.3333 5.77563 22.3333 11.6667Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
               <input className={styles.input}/>
             </div>
             <div className="profile__information">
