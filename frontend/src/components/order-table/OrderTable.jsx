@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './orderTable.module.css'
+import styles from './orderTable.module.css';
 import Order from "../order/Order";
 
 //id="gf-342" state="Завершён" time="12.12.12 12:00" positions="4" issuance="Самовывоз" courier="Пупкин Залупкин " baker="Гадя Хренова" client="Пупкин Залупкин"
