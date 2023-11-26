@@ -1,21 +1,21 @@
-.container{
+.container {
   max-width: 1780px;
   margin: 0 auto;
   padding: 0 30px;
 }
 
-.row{
+.row {
   text-align:center;
 }
 
-.state{
+.state {
   width: 170px;
   height: 35px;
   border-radius: 30px;
   background-color:#E6E9E5;
 }
 
-.select{
+.select {
   width:100%;
   height: 100%;
   border-radius: 30px;
@@ -28,7 +28,7 @@
   text-align: center;
 }
 
-.green{
+.green {
   width:100%;
   height: 100%;
   border-radius: 30px;
@@ -40,7 +40,7 @@
   line-height: normal;
   text-align: center;
 }
-.yellow{
+.yellow {
   width:100%;
   height: 100%;
   border-radius: 30px;
@@ -52,7 +52,7 @@
   line-height: normal;
   text-align: center;
 }
-.red{
+.red {
   width:100%;
   height: 100%;
   border-radius: 30px;
@@ -64,7 +64,7 @@
   line-height: normal;
   text-align: center;
 }
-.blue{
+.blue {
   width:100%;
   height: 100%;
   border-radius: 30px;

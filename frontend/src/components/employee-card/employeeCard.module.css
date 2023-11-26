@@ -1,68 +1,8 @@
-.container {
-  max-width: 1780px;
-  margin: 0 auto;
-  padding: 0 30px;
-}
-
-.table {
-  width:100%;
-  font-family: Fira Mono;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  border-spacing: 2px 30px;
-  padding: 0 50px;
-}
-
-.table__header th {
-  background: #E6E9E5;
-  padding: 12px 0;
-  width: 255px;
-}
-
-.employee {
-  border-radius: 30px 0px 0px 30px;
-}
-
-.age {
-  border-radius: 0px 30px 30px 0px;
-}
-
-.row {
-  text-align:center;
-}
-
-.employee__column {
-  display: flex;
-  align-items: center;
-  column-gap: 25px;
-}
-
-.employee__name {
-  display: flex;
-  justify-content: center;
-  padding-left: 15px;
-}
-
-.open__button {
-  display: flex;
-  align-items: center;
-  padding-left: 15px;
-  background-color: white;
-  font-family: Fira Mono;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  cursor: pointer;
-}
-
 .employee__header {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: center;
 }
 
 .name {
@@ -72,11 +12,14 @@
   line-height: 29px;
   letter-spacing: 0em;
   text-align: left;
-  padding-right: 470px;
 }
 
 .close__button {
   background-color: white;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }
 
 .employee__information {
@@ -215,4 +158,3 @@ margin-left: 30px;
   font-weight: 400;
   line-height: 19px;
 }
-

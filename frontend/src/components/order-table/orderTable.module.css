@@ -1,10 +1,10 @@
-.container{
+.container {
   max-width: 1780px;
   margin: 0 auto;
   padding: 0 30px;
 }
 
-.table{
+.table {
   width:100%;
   font-family: Fira Mono;
   font-size: 20px;
@@ -14,15 +14,15 @@
   border-spacing: 2px 30px;
 }
 
-.header th{
+.header th {
   background: #E6E9E5;
   padding: 12px 0 9px 0;
 }
 
-.id{
+.id {
   border-radius: 30px 0px 0px 30px;
 }
 
-.client{
+.client {
   border-radius: 0px 30px 30px 0px;
 }
