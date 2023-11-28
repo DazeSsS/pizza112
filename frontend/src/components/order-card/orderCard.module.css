@@ -1,13 +1,3 @@
-.container {
-  max-width: 1780px;
-  margin: 0 auto;
-  padding: 0 30px;
-}
-
-.row {
-  text-align:center;
-}
-
 .state {
   width: 170px;
   height: 35px;
@@ -40,6 +30,7 @@
   line-height: normal;
   text-align: center;
 }
+
 .yellow {
   width:100%;
   height: 100%;
@@ -52,6 +43,7 @@
   line-height: normal;
   text-align: center;
 }
+
 .red {
   width:100%;
   height: 100%;
@@ -64,6 +56,7 @@
   line-height: normal;
   text-align: center;
 }
+
 .blue {
   width:100%;
   height: 100%;
@@ -75,4 +68,76 @@
   font-weight: 400;
   line-height: normal;
   text-align: center;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:34px;
+}
+
+.id {
+  font-family: Fira Mono;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.close__button {
+  background-color: white;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.blocks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:44px;
+  margin-top: 20px;
+}
+
+.left {
+  border-radius: 30px;
+  border: 2px solid #E6E9E5;
+  font-family: Fira Mono;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height:38px;
+  width: 516px;
+  height: 440px;
+  padding: 29px 0 0 20px;
+}
+
+.up {
+  border-radius: 30px;
+  border: 2px solid #E6E9E5;
+  font-family: Fira Mono;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height:38px;
+  width: 516px;
+  height: 208px;
+  padding: 29px 0 0 20px;
+  margin-bottom:24px;
+}
+
+.down {
+  border-radius: 30px;
+  border: 2px solid #E6E9E5;
+  font-family: Fira Mono;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height:38px;
+  width: 516px;
+  height: 208px;
+  padding: 29px 0 0 20px;
 }
