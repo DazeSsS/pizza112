@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Group, Permission
 import uuid
 
 class Employee(AbstractUser):
@@ -10,14 +10,15 @@ class Employee(AbstractUser):
     salary = models.PositiveIntegerField(default=0)
 
 
-class Customer(AbstractUser):
+class Customer(models.Model):
     customer_id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True)
     phone_number = models.CharField(max_length=12)
-
+    name = models.CharField(max_length=50)
+    
 
 class Delivery(models.Model):
     delivery_id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True)
-    courier = models.ForeignKey(Employee, on_delete=models.SET_NULL)
+    courier = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True)
     COMPLETED = "completed"
     COOKING = "cooking"
     CANCELLED = "cancelled"
@@ -44,9 +45,9 @@ class Product(models.Model):
 class Order(models.Model):
     order_id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True)
     date = models.DateField()
-    employee_id = models.ForeignKey(Employee, on_delete=models.SET_NULL)
-    customer_id = models.ForeignKey(Customer, on_delete=models.SET_NULL)
-    delivery_id = models.ForeignKey(Delivery, on_delete=models.SET_NULL)
+    employee_id = models.ForeignKey(Employee, null=True, on_delete=models.SET_NULL)
+    customer_id = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)
+    delivery_id = models.ForeignKey(Delivery, null=True, on_delete=models.SET_NULL)
     address = models.CharField(max_length=255)
     order_due = models.DateTimeField(null=True, blank=True)
     total = models.DecimalField(max_digits=10, decimal_places=2)
@@ -54,5 +55,5 @@ class Order(models.Model):
 
 class ItemsOrdered(models.Model):
     order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product_id = models.ForeignKey(Product, on_delete=models.SET_NULL)
+    product_id = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     amount = models.IntegerField()
