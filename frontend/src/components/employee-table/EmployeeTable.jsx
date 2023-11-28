@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './employeeTable.module.css';
-import Modal from '../modal-window/Modal';
+import Modal from '../modal/Modal';
 import { useState } from 'react';
 import EmployeeCard from '../employee-card/EmployeeCard';
 
