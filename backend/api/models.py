@@ -12,9 +12,11 @@ class Employee(AbstractUser):
 
 
 class Customer(models.Model):
-    customer_id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True)
     phone_number = models.CharField(max_length=12)
     name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
     
 
 class Delivery(models.Model):
@@ -35,6 +37,9 @@ class Delivery(models.Model):
         choices=STATUS_CHOICES,
         default=COOKING,
     )
+
+    def __str__(self):
+        return self.courier.username + ' ' + self.status
     
 
 class Product(models.Model):
@@ -46,15 +51,15 @@ class Product(models.Model):
 class Order(models.Model):
     order_id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True)
     date = models.DateField()
-    employee_id = models.ForeignKey(Employee, null=True, on_delete=models.SET_NULL)
-    customer_id = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)
-    delivery_id = models.ForeignKey(Delivery, null=True, on_delete=models.SET_NULL)
+    employee = models.ForeignKey(Employee, null=True, on_delete=models.SET_NULL)
+    customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)
+    delivery = models.ForeignKey(Delivery, null=True, on_delete=models.SET_NULL)
     address = models.CharField(max_length=255)
     order_due = models.DateTimeField(null=True, blank=True)
     total = models.DecimalField(max_digits=10, decimal_places=2)
 
 
 class ItemsOrdered(models.Model):
-    order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product_id = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     amount = models.IntegerField()
