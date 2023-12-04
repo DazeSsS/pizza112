@@ -20,7 +20,6 @@ class Customer(models.Model):
     
 
 class Delivery(models.Model):
-    delivery_id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True)
     courier = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True)
     COMPLETED = "completed"
     COOKING = "cooking"
@@ -39,7 +38,7 @@ class Delivery(models.Model):
     )
 
     def __str__(self):
-        return self.courier.username + ' ' + self.status
+        return f'{self.courier.username} - {self.status}'
     
 
 class Product(models.Model):
@@ -47,9 +46,11 @@ class Product(models.Model):
     product_name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
+    def __str__(self):
+        return self.product_name
+
 
 class Order(models.Model):
-    order_id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True)
     date = models.DateField()
     employee = models.ForeignKey(Employee, null=True, on_delete=models.SET_NULL)
     customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)
@@ -58,8 +59,14 @@ class Order(models.Model):
     order_due = models.DateTimeField(null=True, blank=True)
     total = models.DecimalField(max_digits=10, decimal_places=2)
 
+    def __str__(self):
+        return f'{self.employee.username} - {self.address}'
+
 
 class ItemsOrdered(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     amount = models.IntegerField()
+
+    def __str__(self):
+        return self.product.product_name
