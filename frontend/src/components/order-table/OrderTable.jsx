@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './orderTable.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Modal from "../modal/Modal";
 import OrderCard from "../order-card/OrderCard";
 
@@ -33,7 +33,7 @@ const parameters = [
     positionsNum:"4",
     positions:"рис курица курица рис рис",
     issuance:"Самовывоз",
-    courier:"Иван Зорин",
+    courier:"Иван Раков",
     baker:"Елизавета Карамолина",
     client:"Владимир Тарасенко",
     clientPhone:"+78439852873",
@@ -51,7 +51,7 @@ const parameters = [
     positionsNum:"4",
     positions:"рис курица курица рис рис",
     issuance:"Самовывоз",
-    courier:"Иван Зорин",
+    courier:"Иван Раков",
     baker:"Елизавета Карамолина",
     client:"Владимир Тарасенко",
     clientPhone:"+78439852873",
@@ -79,36 +79,53 @@ const parameters = [
   }
 ]
 
+export const STATES = {
+  'Завершён': styles.green,
+  'Готовится': styles.yellow,
+  'Отменён': styles.red,
+  'Доставка': styles.blue,
+}
+
 const OrderTable = () => {
   const [modalActive, setModalActive] = useState(false);
   const [currentOrder, setCurrentOrder] = useState(parameters[0]);
-  const states = ["Завершён","Готовится","Отменён","Доставка"]
-  const stylesArr = [styles.green, styles.yellow, styles.red, styles.blue];
-  const rows = parameters.map(function(item) {
-    let stateStart = 0;
-    for (let i = 0; i < states.length; i++){
-      if (states[i]===item.state) {stateStart = i}
-    }
-    const stateStatus = states.map(function(s){
-      return s===item.state;
-    });
-    
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentStates, setCurrentStates] = useState([]);
 
+  useEffect(() => {
+    setCurrentStates(parameters.map(item => item.state));
+  }, []);
+
+  const rows = parameters.map(function(item, index) {
     return <tr className={styles.row}>
       <td>
       <button className={styles.openButton} onClick={() => {
-          setModalActive(true)
-          setCurrentOrder(item)
+          setModalActive(true);
+          setCurrentOrder(item);
+          setCurrentIndex(index);
         }}>
         {item.id}
       </button>
       </td>
       <td className={styles.state}>
-        <select id={item.id} className={stylesArr[stateStart]} onChange={e => document.getElementById(item.id).className = (e.target.value)}>
-          <option selected={stateStatus[0]} className={styles.green} value={styles.green}>{states[0]}</option>
-          <option selected={stateStatus[1]} className={styles.yellow} value={styles.yellow}>{states[1]}</option>
-          <option selected={stateStatus[2]} className={styles.red} value={styles.red}>{states[2]}</option>
-          <option selected={stateStatus[3]} className={styles.blue} value={styles.blue}>{states[3]}</option>
+        <select 
+          className={STATES[currentStates[index]]}
+          onChange={e => setCurrentStates(prev => [
+            ...(prev.slice(0, index)),
+            e.target.value,
+            ...(prev.slice(index + 1))
+          ])}
+        >
+          {Object.keys(STATES).map((state) => (
+            <option 
+              key={state}
+              className={STATES[state]}
+              value={state}
+              selected={currentStates[index] === state}
+            >
+              {state}
+            </option>
+          ))}
         </select>
       </td>
       <td>{item.time}</td>
@@ -138,7 +155,13 @@ const OrderTable = () => {
 
       </table>  
       <Modal active={modalActive} setActive={setModalActive}>
-        <OrderCard item={currentOrder} setModalActive={setModalActive}></OrderCard>
+        <OrderCard
+          item={currentOrder}
+          setModalActive={setModalActive}
+          index={currentIndex}
+          currentStates={currentStates}
+          setCurrentStates={setCurrentStates}
+        ></OrderCard>
       </Modal>
     </div> 
   )

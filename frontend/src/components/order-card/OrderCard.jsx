@@ -1,31 +1,41 @@
 import React from 'react';
 import styles from './orderCard.module.css'
 import closeButton from '../../img/closeButton.svg'
+import { STATES } from '../order-table/OrderTable';
 
-const OrderCard = ({item, setModalActive}) => {
-  const states = ["Завершён","Готовится","Отменён","Доставка"]
-  const stylesArr = [styles.green, styles.yellow, styles.red, styles.blue];
-  let stateStart = 0;
-  for (let i = 0; i < states.length; i++){
-    if (states[i]===item.state) {stateStart = i}
-  }
-  const stateStatus = states.map(function(s){
-    return s===item.state;
-  });
-  
+const OrderCard = ({item, setModalActive, index, currentStates, setCurrentStates}) => {
   return(
     <>
       <div className={styles.header}>
         <p className={styles.id}>Заказ: {item.id}</p>
         <div className={styles.state}>
-          <select id={item.id+"-"} className={stylesArr[stateStart]} onChange={e => {
+          {/* <select id={item.id+"-"} className={stylesArr[stateStart]} onChange={e => {
             document.getElementById(item.id+"-").className = (e.target.value)
           }}>
             <option selected={stateStatus[0]} className={styles.green} value={styles.green}>{states[0]}</option>
             <option selected={stateStatus[1]} className={styles.yellow} value={styles.yellow}>{states[1]}</option>
             <option selected={stateStatus[2]} className={styles.red} value={styles.red}>{states[2]}</option>
             <option selected={stateStatus[3]} className={styles.blue} value={styles.blue}>{states[3]}</option>
-          </select>
+          </select> */}
+          <select 
+            className={STATES[currentStates[index]]}
+            onChange={e => setCurrentStates(prev => [
+              ...(prev.slice(0, index)),
+              e.target.value,
+              ...(prev.slice(index + 1))
+            ])}
+        >
+          {Object.keys(STATES).map((state) => (
+            <option 
+              key={state}
+              className={STATES[state]}
+              value={state}
+              selected={currentStates[index] === state}
+            >
+              {state}
+            </option>
+          ))}
+        </select>
         </div>
         <button className={styles.close__button} onClick={() => setModalActive(false)}>
           <img src={closeButton} alt="" />
