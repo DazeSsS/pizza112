@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Modal from "../modal/Modal";
 import EmployeeCard from '../employee-card/EmployeeCard';
+import CourierProfile from '../courier-profile/CourierProfile';
 
 // У функции header теперь параметр view с 4 значениями: home, orders, employees, baker: с тремя хедерами для разных страничек
 
@@ -73,6 +74,35 @@ const Header = ({view}) => {
         </div>
         <Modal active={modalActive} setActive={setModalActive}>
           <EmployeeCard item={currentEmployee} setModalActive={setModalActive}/>
+        </Modal>
+      </header>
+    )
+  }
+  if (view === "courier"){
+    return(
+      <header className={styles.searchHeader}>
+        <div className={styles.courier__container}>
+          <div className={styles.header__row}>
+            <Link className={styles.website__information} to="/">
+              <img src={websiteLogo} width="60px" height="60px" alt="WebsiteLogo"/>
+            </Link>
+            <div className={styles.courier__search}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 26 26" fill="none">
+              <path d="M11.6667 5C15.3485 5 18.3333 7.98477 18.3333 11.6667M19.2117 19.2065L25 25M22.3333 11.6667C22.3333 17.5577 17.5577 22.3333 11.6667 22.3333C5.77563 22.3333 1 17.5577 1 11.6667C1 5.77563 5.77563 1 11.6667 1C17.5577 1 22.3333 5.77563 22.3333 11.6667Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+              <input className={styles.input}/>
+            </div>
+            <button className={styles.courier__profile__information} onClick={() => {
+                setModalActive(true)
+              }}>
+              <span>User's name</span>
+              <img src={profileLogo} width="45px" height="45px" alt="ProfileLogo"/>
+            </button>
+          </div>
+          <h1 className={styles.courier__pageName}>Данные заказов</h1>
+        </div>
+        <Modal active={modalActive} setActive={setModalActive} size={"courier_profile"}>
+          <CourierProfile item={currentEmployee} setModalActive={setModalActive}/>
         </Modal>
       </header>
     )
