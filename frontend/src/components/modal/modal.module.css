@@ -46,3 +46,33 @@
   transform: scale(1);
   transition: 0.4s all;
 }
+
+.modal__content__active__baker{
+  padding: 20px;
+  border-radius: 15px;
+  background-color: white;
+  height: 450px;
+  width: 650px;
+  transform: scale(1);
+  transition: 0.4s all;  
+}
+
+.modal__content__active__courier__profile{
+  padding: 20px;
+  border-radius: 15px;
+  background-color: white;
+  width: 320px;
+  height: 618px;
+  transform: scale(1);
+  transition: 0.4s all;  
+}
+
+.modal__content__active__courier__order{
+  padding: 20px;
+  border-radius: 15px;
+  background-color: white;
+  width: 320px;
+  height: 461px;
+  transform: scale(1);
+  transition: 0.4s all;  
+}

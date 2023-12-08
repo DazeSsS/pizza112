@@ -15,6 +15,11 @@
   column-gap: 30px;
 }
 
+.header__row button{
+  background-color: white;
+  cursor: pointer;
+}
+
 .website__information {
   display: flex;
   align-items: center;
@@ -86,6 +91,16 @@ input:focus {
   padding: 0 10px;
 }
 
-.hheader {
+.searchHeader {
   padding: 30px 0 20px;
+}
+
+.pageName{
+  font-family: Fira Mono;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  display: flex;
+  justify-content: center;
 }
