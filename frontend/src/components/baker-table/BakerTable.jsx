@@ -79,8 +79,8 @@ const BakerTable = (Baker = "") => {
     setCurrentStates(parameters.map(item => item.state));
   }, []);
 
-  const rows = parameters.map(function(item, index) {
-    return <tr className={styles.row}>
+  const rows = parameters.map((item, index) => (
+    <tr key={item.id} className={styles.row}>
       <td>
       <button className={styles.openButton} onClick={() => {
           setModalActive(true);
@@ -93,6 +93,7 @@ const BakerTable = (Baker = "") => {
       <td className={styles.state}>
         <select 
           className={STATES[currentStates[index]]}
+          value={currentStates[index]}
           onChange={e => setCurrentStates(prev => [
             ...(prev.slice(0, index)),
             e.target.value,
@@ -104,7 +105,6 @@ const BakerTable = (Baker = "") => {
               key={state}
               className={STATES[state]}
               value={state}
-              selected={currentStates[index] === state}
             >
               {state}
             </option>
@@ -116,22 +116,24 @@ const BakerTable = (Baker = "") => {
       <td>{item.positionsNum}</td>
       <td>{item.issuance}</td>
     </tr>
-  });
+  ));
 
   return(
     <div className={styles.container}>
       <table className={styles.table}>
-        <tr className={styles.header}>
-          <th className={styles.id}>id заказа</th>
-          <th>Cтатус</th>
-          <th>Время зак.</th>
-          <th>Время готовн.</th>
-          <th>Позиций</th>
-          <th className={styles.last}>Выдача</th>
-        </tr>
-
-        {rows}
-
+        <tbody>
+          <tr className={styles.header}>
+            <th className={styles.id}>id заказа</th>
+            <th>Cтатус</th>
+            <th>Время зак.</th>
+            <th>Время готовн.</th>
+            <th>Позиций</th>
+            <th className={styles.last}>Выдача</th>
+          </tr>
+  
+          {rows}
+  
+        </tbody>
       </table>  
       <Modal active={modalActive} setActive={setModalActive} size="baker">
         <BakerCard
@@ -140,7 +142,7 @@ const BakerTable = (Baker = "") => {
           index={currentIndex}
           currentStates={currentStates}
           setCurrentStates={setCurrentStates}
-        ></BakerCard>
+        />
       </Modal>
     </div> 
   )

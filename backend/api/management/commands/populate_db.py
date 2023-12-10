@@ -1,5 +1,6 @@
 from typing import Any
 from django.core.management.base import BaseCommand
+from django.contrib.auth.hashers import make_password
 from api.models import Employee, Customer, Order, Delivery, Product, ItemsOrdered
 import datetime
 
@@ -11,10 +12,83 @@ print("заполнение БД ...")
 
 class Command(BaseCommand):
     def _create_objects(self):
-        employee_1 = Employee.objects.create(username="username_0", phone_number="+79592331342", role="Менеджер", first_work_day=first_day_preset, last_work_day=last_day_preset, salary=50000)
-        employee_2 = Employee.objects.create(username="username_1", phone_number="+79602341343", role="Повар", first_work_day=first_day_preset, last_work_day=last_day_preset, salary=30000)
-        employee_3 = Employee.objects.create(username="username_2", phone_number="+79612351344", role="Курьер", first_work_day=first_day_preset, last_work_day=last_day_preset, salary=25000)
-        employee_4 = Employee.objects.create(username="username_3", phone_number="+79622361345", role="Курьер", first_work_day=first_day_preset, last_work_day=last_day_preset, salary=25000)
+        employee_1 = Employee.objects.create(
+            username="rakov",
+            password=f"{make_password('kegaboom112')}",
+            first_name="Иван",
+            last_name="Раков",
+            middle_name="Владимирович",
+            phone_number="+79592331342",
+            role="Управляющий",
+            first_work_day=first_day_preset,
+            last_work_day=last_day_preset,
+            salary=50000
+        )
+
+        employee_2 = Employee.objects.create(
+            username="tarasenko",
+            password=f"{make_password('kegaboom112')}",
+            first_name="Владимир",
+            last_name="Тарасенко",
+            middle_name="",
+            phone_number="+79602341343",
+            role="Пекарь",
+            first_work_day=first_day_preset, last_work_day=last_day_preset,
+            salary=30000
+        )
+
+        employee_3 = Employee.objects.create(
+            username="zorin",
+            password=f"{make_password('kegaboom112')}",
+            first_name="Иван",
+            last_name="Зорин",
+            middle_name="",
+            phone_number="+79612351344",
+            role="Курьер",
+            first_work_day=first_day_preset,
+            last_work_day=last_day_preset,
+            salary=26000
+        )
+
+        employee_4 = Employee.objects.create(
+            username="volchihin",
+            password=f"{make_password('kegaboom112')}",
+            first_name="Артём",
+            last_name="Волчихин",
+            middle_name="",
+            phone_number="+79622361345",
+            role="Пекарь",
+            first_work_day=first_day_preset,
+            last_work_day=last_day_preset,
+            salary=22000
+        )
+
+        employee_5 = Employee.objects.create(
+            username="gorshkov",
+            password=f"{make_password('kegaboom112')}",
+            first_name="Георгий",
+            last_name="Горшков",
+            middle_name="",
+            phone_number="+79622361345",
+            role="Курьер",
+            first_work_day=first_day_preset,
+            last_work_day=last_day_preset,
+            salary=27000
+        )
+
+        employee_6 = Employee.objects.create(
+            username="karamolina",
+            password=f"{make_password('kegaboom112')}",
+            first_name="Елизавета",
+            last_name="Карамолина",
+            middle_name="",
+            gender="Женский",
+            phone_number="+79622361345",
+            role="Пекарь",
+            first_work_day=first_day_preset,
+            last_work_day=last_day_preset,
+            salary=18000
+        )
 
         product_1 = Product.objects.create(product_name="pizza112", price=112)
         product_2 = Product.objects.create(product_name="Пицца", price=300)

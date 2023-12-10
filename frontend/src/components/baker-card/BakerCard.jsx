@@ -11,6 +11,7 @@ const BakerCard = ({item, setModalActive, index, currentStates, setCurrentStates
         <div className={styles.state}>
         <select 
             className={STATES[currentStates[index]]}
+            value={currentStates[index]}
             onChange={e => setCurrentStates(prev => [
               ...(prev.slice(0, index)),
               e.target.value,
@@ -22,7 +23,6 @@ const BakerCard = ({item, setModalActive, index, currentStates, setCurrentStates
               key={state}
               className={STATES[state]}
               value={state}
-              selected={currentStates[index] === state}
             >
               {state}
             </option>

@@ -4,7 +4,16 @@ import uuid
 
 
 class Employee(AbstractUser):
-    phone_number = models.CharField(max_length=12)
+    MALE = 'Мужской'
+    FEMALE = 'Женский'
+    GENDER_CHOICES = [
+        (MALE, 'М'),
+        (FEMALE, 'Ж')
+    ]
+
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default=MALE)
+    middle_name = models.CharField(max_length=25, blank=True, null=True)
+    phone_number = models.CharField(max_length=12, blank=True, null=True)
     role = models.CharField(max_length=25)
     first_work_day = models.DateTimeField(blank=True, null=True)
     last_work_day = models.DateTimeField(blank=True, null=True)

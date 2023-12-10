@@ -82,8 +82,8 @@ const CourierTable = (Courier = "") => {
     setCurrentStates(parameters.map(item => item.state));
   }, []);
 
-  const rows = parameters.map(function(item, index) {
-    return <tr className={styles.row}>
+  const rows = parameters.map((item, index) => (
+    <tr key={item.id} className={styles.row}>
       <td>
       <button className={styles.openButton} onClick={() => {
           setModalActive(true);
@@ -96,6 +96,7 @@ const CourierTable = (Courier = "") => {
       <td className={styles.state}>
         <select 
           className={STATES[currentStates[index]]}
+          value={currentStates[index]}
           onChange={e => setCurrentStates(prev => [
             ...(prev.slice(0, index)),
             e.target.value,
@@ -107,7 +108,6 @@ const CourierTable = (Courier = "") => {
               key={state}
               className={STATES[state]}
               value={state}
-              selected={currentStates[index] === state}
             >
               {state}
             </option>
@@ -116,19 +116,21 @@ const CourierTable = (Courier = "") => {
       </td>
       <td>{item.deliveryTime}</td>
     </tr>
-  });
+  ));
 
   return(
     <div className={styles.container}>
       <table className={styles.table}>
-        <tr className={styles.header}>
-          <th className={styles.id}>id заказа</th>
-          <th>Cтатус</th>
-          <th className={styles.last}>Время дост.</th>
-        </tr>
-
-        {rows}
-
+        <tbody>
+          <tr className={styles.header}>
+            <th className={styles.id}>id заказа</th>
+            <th>Cтатус</th>
+            <th className={styles.last}>Время дост.</th>
+          </tr>
+  
+          {rows}
+  
+        </tbody>
       </table>  
       <Modal active={modalActive} setActive={setModalActive} size="courier_order">
         <CourierCard
@@ -137,7 +139,7 @@ const CourierTable = (Courier = "") => {
           index={currentIndex}
           currentStates={currentStates}
           setCurrentStates={setCurrentStates}
-        ></CourierCard>
+        />
       </Modal>
     </div> 
   )

@@ -10,6 +10,7 @@ const CourierCard = ({item, setModalActive, index, currentStates, setCurrentStat
         <div className={styles.state}>
         <select 
             className={STATES[currentStates[index]]}
+            value={currentStates[index]}
             onChange={e => setCurrentStates(prev => [
               ...(prev.slice(0, index)),
               e.target.value,
@@ -21,7 +22,6 @@ const CourierCard = ({item, setModalActive, index, currentStates, setCurrentStat
               key={state}
               className={STATES[state]}
               value={state}
-              selected={currentStates[index] === state}
             >
               {state}
             </option>

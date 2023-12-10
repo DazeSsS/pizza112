@@ -108,6 +108,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+DJOSER = {
+    'SERIALIZERS': {
+        'user_create': 'api.serializers.EmployeeSerializer',
+        'user_delete': 'api.serializers.EmployeeSerializer',
+        'user': 'api.serializers.EmployeeSerializer',
+        'current_user': 'api.serializers.EmployeeSerializer'
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
