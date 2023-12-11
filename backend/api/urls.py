@@ -5,9 +5,8 @@ from .views import *
 
 router = routers.DefaultRouter()
 router.register(r'customer', CustomerViewSet)
-router.register(r'delivery', DeliveryViewSet)
 router.register(r'product', ProductViewSet)
-router.register(r'order', OrderViewSet)
+router.register(r'orders', OrderViewSet)
 router.register(r'items-ordered', ItemsOrderedViewSet)
 
 urlpatterns = [

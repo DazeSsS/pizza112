@@ -15,8 +15,8 @@ class Employee(AbstractUser):
     middle_name = models.CharField(max_length=25, blank=True, null=True)
     phone_number = models.CharField(max_length=12, blank=True, null=True)
     role = models.CharField(max_length=25)
-    first_work_day = models.DateTimeField(blank=True, null=True)
-    last_work_day = models.DateTimeField(blank=True, null=True)
+    first_work_day = models.DateField(blank=True, null=True)
+    last_work_day = models.DateField(blank=True, null=True)
     salary = models.PositiveIntegerField(default=0)
 
 
@@ -26,29 +26,6 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.name
-    
-
-class Delivery(models.Model):
-    courier = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True)
-    COMPLETED = "completed"
-    COOKING = "cooking"
-    CANCELLED = "cancelled"
-    DELIVERY = "delivery"
-    STATUS_CHOICES = [
-        (COMPLETED, "завершен"),
-        (COOKING, "готовится"),
-        (CANCELLED, "отменен"),
-        (DELIVERY, "в доставке"),
-    ]
-    status = models.CharField(
-        max_length=9,
-        choices=STATUS_CHOICES,
-        default=COOKING,
-    )
-
-    def __str__(self):
-        return f'{self.courier.username} - {self.status}'
-    
 
 class Product(models.Model):
     # id назначен по умолчанию
@@ -60,13 +37,42 @@ class Product(models.Model):
 
 
 class Order(models.Model):
+    COMPLETED = "Завершён"
+    COOKING = "Готовится"
+    CANCELLED = "Отменён"
+    DELIVERY = "Доставка"
+    STATUS_CHOICES = [
+        (COMPLETED, "completed"),
+        (COOKING, "cooking"),
+        (CANCELLED, "cancelled"),
+        (DELIVERY, "delivery"),
+    ]
+    status = models.CharField(
+        max_length=9,
+        choices=STATUS_CHOICES,
+        default=COOKING,
+    )
+
+    PICKUP = "Cамовывоз"
+    DELIVERY = "Доставка"
+    DELIVERY_TYPE_CHOICES = [
+        (PICKUP, "pickup"),
+        (DELIVERY, "delivery")
+    ]
+    delivery_type = models.CharField(
+        max_length=9,
+        choices=STATUS_CHOICES,
+        default=PICKUP
+    )
+
     date = models.DateField()
-    employee = models.ForeignKey(Employee, null=True, on_delete=models.SET_NULL)
+    employee = models.ForeignKey(Employee, null=True, on_delete=models.SET_NULL, related_name="orders_cooking")
     customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)
-    delivery = models.ForeignKey(Delivery, null=True, on_delete=models.SET_NULL)
     address = models.CharField(max_length=255)
     order_due = models.DateTimeField(null=True, blank=True)
     total = models.DecimalField(max_digits=10, decimal_places=2)
+    courier = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True, related_name="orders_delivering")
+    
 
     def __str__(self):
         return f'{self.employee.username} - {self.address}'

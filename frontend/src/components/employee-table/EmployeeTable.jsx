@@ -86,7 +86,7 @@ const EmployeeTable = () => {
       </td>
       <td>{item.role}</td>
       <td>{item.phone_number}</td>
-      <td>М</td>
+      <td>{item.gender}</td>
       <td>19</td>
     </tr>
 

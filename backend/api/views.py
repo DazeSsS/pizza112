@@ -12,12 +12,6 @@ class CustomerViewSet(viewsets.ReadOnlyModelViewSet):
     # permission_classes = [IsAuthenticated]
 
 
-class DeliveryViewSet(viewsets.ModelViewSet):
-    queryset = Delivery.objects.all()
-    serializer_class = DeliverySerializer
-    # permission_classes = [IsAuthenticated]
-
-
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer

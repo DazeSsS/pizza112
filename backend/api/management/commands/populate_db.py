@@ -1,11 +1,11 @@
 from typing import Any
 from django.core.management.base import BaseCommand
 from django.contrib.auth.hashers import make_password
-from api.models import Employee, Customer, Order, Delivery, Product, ItemsOrdered
+from api.models import Employee, Customer, Order, Product, ItemsOrdered
 import datetime
 
-first_day_preset = datetime.datetime(2023, 6, 5, 12, 00, 00)
-last_day_preset = datetime.datetime(2024, 6, 5, 12, 00, 00)
+first_day_preset = datetime.date(2023, 6, 5)
+last_day_preset = datetime.date(2024, 6, 5)
 due_preset = datetime.datetime(2023, 12, 6, 23, 59, 59)
 
 print("заполнение БД ...")
@@ -101,12 +101,8 @@ class Command(BaseCommand):
         customer_4 = Customer.objects.create(phone_number="+79572311340", name="Елизавета")
         customer_5 = Customer.objects.create(phone_number="+79582321341", name="Георгий")
 
-        delivery_1 = Delivery.objects.create(courier=employee_3, status="delivery")
-        delivery_2 = Delivery.objects.create(courier=employee_4, status="cooking")
-        delivery_3 = Delivery.objects.create(courier=employee_3, status="cancelled")
-
-        order_1 = Order.objects.create(date=last_day_preset, employee=employee_2, customer=customer_3, delivery=delivery_1, address='ш. Приколов, дом 228, кв.54', order_due=due_preset, total=730)
-        order_2 = Order.objects.create(date=last_day_preset, employee=employee_2, customer=customer_2, delivery=delivery_2, address='ул. Мира, дом 32, кв. 204', order_due=due_preset, total=1200)
+        order_1 = Order.objects.create(status="cooking", delivery_type="pickup", date=last_day_preset, employee=employee_2, customer=customer_3, address='ш. Приколов, дом 228, кв.54', order_due=due_preset, total=730)
+        order_2 = Order.objects.create(status="cooking", delivery_type="delivery", date=last_day_preset, employee=employee_2, customer=customer_2, address='ул. Мира, дом 32, кв. 204', order_due=due_preset, total=1200, courier=employee_3)
 
         items_ordered_1 = ItemsOrdered.objects.create(order=order_1, product=product_2, amount=2)
         items_ordered_2 = ItemsOrdered.objects.create(order=order_2, product=product_4, amount=5)
