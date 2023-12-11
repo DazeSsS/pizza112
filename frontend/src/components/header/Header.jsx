@@ -108,7 +108,6 @@ const Header = ({view}) => {
           <h1 className={styles.courier__pageName}>Данные заказов</h1>
         </div>
         <Modal active={modalActive} setActive={setModalActive} size={"courier_profile"}>
-          {console.log(employee)}
           <CourierProfile item={employee} setModalActive={setModalActive}/>
         </Modal>
       </header>

@@ -27,15 +27,6 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# class OrderSerializer(serializers.ModelSerializer):
-#     employee = EmployeeSerializer(many = False)
-#     customer = CustomerSerializer(many = False)
-
-#     class Meta:
-#         model = Order
-#         fields = ['date', 'employee', 'customer', 'delivery', 'address', 'order_due', 'total']
-
-
 class OrderSerializer(serializers.ModelSerializer):
     employee_first_name = serializers.SerializerMethodField()
     customer_name = serializers.SerializerMethodField()

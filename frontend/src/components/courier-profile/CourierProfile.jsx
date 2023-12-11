@@ -28,8 +28,8 @@ const CourierProfile = ({item, setModalActive}) => {
         </div>
         <div className={styles.work__info}>
           <div className={styles.work__information}>
-            <span>Первый рабочий день: </span>
-            <span>Последний рабочий день: </span>
+            <span>Первый рабочий день: {item.first_work_day}</span>
+            <span>Последний рабочий день: {item.last_work_day}</span>
             <span>Заработная плата: {item.salary} рублей</span>
             <span className={styles.salary}>Квиток о зп:  
               <button className={styles.download}>

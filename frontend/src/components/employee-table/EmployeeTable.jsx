@@ -71,8 +71,6 @@ const EmployeeTable = () => {
     getEmployees();
   }, []);
 
-  console.log(employees);
-
   const rows = employees.map(item => {
     return <tr className={styles.row} key={item.id}>
       <td className={styles.employee__column}>
@@ -96,14 +94,16 @@ const EmployeeTable = () => {
 
     <div className={styles.container}>
       <table className={styles.table}>
-        <tr className={styles.table__header}>
-          <th className={styles.employee}>Сотрудник</th>
-          <th>Должность</th>
-          <th>Телефон</th>
-          <th>Пол сотрудника</th>
-          <th className={styles.age}>Возраст</th>
-        </tr>
-        {rows}
+        <tbody>
+          <tr className={styles.table__header}>
+            <th className={styles.employee}>Сотрудник</th>
+            <th>Должность</th>
+            <th>Телефон</th>
+            <th>Пол сотрудника</th>
+            <th className={styles.age}>Возраст</th>
+          </tr>
+          {rows}
+        </tbody>
         <Modal active={modalActive} setActive={setModalActive}>
           <EmployeeCard item={currentEmployee} setModalActive={setModalActive}/>
         </Modal>

@@ -117,7 +117,7 @@ const OrderTable = () => {
   }, []);
 
   useEffect(() => {
-    setCurrentStates(orders.map(item => item.state));
+    setCurrentStates(orders.map(item => item.status));
   }, [orders]);
 
   const rows = orders.map((item, index) => (
@@ -193,7 +193,7 @@ const OrderTable = () => {
   )
 }
 
-export default OrderTable
+export default OrderTable;
 
 // const OrderTable = () => {
 //   const [orders, setOrders] = useState([]);
