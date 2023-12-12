@@ -10,5 +10,7 @@ router.register(r'orders', OrderViewSet)
 router.register(r'items-ordered', ItemsOrderedViewSet)
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('employee/<int:employee_id>/', employee_orders, name='employee_orders'),
+    path('employee/<int:employee_id>/orders/', employee_orders_list, name='employee_orders_list'),
 ]

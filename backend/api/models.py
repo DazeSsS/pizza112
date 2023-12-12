@@ -21,8 +21,9 @@ class Employee(AbstractUser):
 
 
 class Customer(models.Model):
-    phone_number = models.CharField(max_length=12)
+    phone_number = models.CharField(max_length=12, unique=True)
     name = models.CharField(max_length=50)
+    email = models.EmailField(null=True)
 
     def __str__(self):
         return self.name
@@ -66,6 +67,8 @@ class Order(models.Model):
     )
 
     date = models.DateField()
+    order_ready_time = models.TimeField(null=True, blank=True)
+    order_delivered_time = models.TimeField(null=True, blank=True)
     employee = models.ForeignKey(Employee, null=True, on_delete=models.SET_NULL, related_name="orders_cooking")
     customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)
     address = models.CharField(max_length=255)

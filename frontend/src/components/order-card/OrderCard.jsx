@@ -35,25 +35,25 @@ const OrderCard = ({item, setModalActive, index, currentStates, setCurrentStates
       </div>
       <div className={styles.blocks}>
         <div className={styles.left}>
-          <p>Время заказа: {item.time}</p>
-          <p>Время готовности: {item.readyTime}</p>
-          <p>Время выдачи: {item.issueTime}</p>
-          <p>Стоимость заказа: {item.price} рублей</p>
-          <p>Выдача: {item.issuance}</p>
-          <p>Количество позиций: {item.positionsNum}</p>
-          <p>Позиции: {item.positions}</p>
+          <p>Дата заказа: {item.date}</p>
+          <p>Время готовности: {item.order_ready_time}</p>
+          <p>Время выдачи: {item.order_delivered_time}</p>
+          <p>Стоимость заказа: {item.total} рублей</p>
+          <p>Выдача: {item.delivery_type}</p>
+          <p>Количество позиций: {item.items_count}</p>
+          <p>Позиции: {item.items_in_order}</p>
         </div>
         <div className={styles.right}>
           <div className={styles.up}>
-            <p>Клиент: {item.client}</p>
-            <p>Номер клиента: {item.clientPhone}</p>
-            <p>Эл. почта клиента: {item.clientMail}</p>
-            <p>Адрес доставки: {item.clientAdress}</p>
+            <p>Клиент: {item.customer_name}</p>
+            <p>Номер клиента: {item.customer_phone_number}</p>
+            <p>Эл. почта клиента: {item.customer_email}</p>
+            <p>Адрес доставки: {item.address}</p>
           </div>
           <div className={styles.down}>
-            <p>Повар: {item.baker}</p>
-            <p>Курьер: {item.courier}</p>
-            <p>Номер курьера: {item.courierPhone}</p>
+            <p>Повар: {item.employee_first_name} {item.employee_last_name}</p>
+            <p>Курьер: {item.courier_first_name} {item.courier_last_name}</p>
+            <p>Номер курьера: {item.courier_phone_number}</p>
           </div>
         </div>
       </div>
