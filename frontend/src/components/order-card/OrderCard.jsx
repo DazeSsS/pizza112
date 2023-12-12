@@ -41,7 +41,11 @@ const OrderCard = ({item, setModalActive, index, currentStates, setCurrentStates
           <p>Стоимость заказа: {item.total} рублей</p>
           <p>Выдача: {item.delivery_type}</p>
           <p>Количество позиций: {item.items_count}</p>
-          <p>Позиции: {item.items_in_order}</p>
+          <p>Позиции: {item.items_in_order
+              ? item.items_in_order.join(', ')
+              : ''
+            }
+          </p> 
         </div>
         <div className={styles.right}>
           <div className={styles.up}>
@@ -52,8 +56,12 @@ const OrderCard = ({item, setModalActive, index, currentStates, setCurrentStates
           </div>
           <div className={styles.down}>
             <p>Повар: {item.employee_first_name} {item.employee_last_name}</p>
-            <p>Курьер: {item.courier_first_name} {item.courier_last_name}</p>
-            <p>Номер курьера: {item.courier_phone_number}</p>
+            {item.courier_first_name && (
+              <>
+                <p>Курьер: {item.courier_first_name} {item.courier_last_name}</p>
+                <p>Номер курьера: {item.courier_phone_number}</p>
+              </>
+            )}
           </div>
         </div>
       </div>

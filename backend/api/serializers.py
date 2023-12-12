@@ -48,8 +48,8 @@ class OrderSerializer(serializers.ModelSerializer):
             'courier_last_name',
             'courier_phone_number',
             'items_in_order',
-            'order_ready_time',
-            'order_delivered_time'
+            'ready_time',
+            'delivered_time'
         ]
 
     def get_employee_first_name(self, obj):
@@ -85,7 +85,7 @@ class OrderSerializer(serializers.ModelSerializer):
     
     def get_items_in_order(self, obj):
         items = obj.itemsordered_set.all()
-        return [f'{item.product.product_name} x{item.amount} ' for item in items]
+        return [f'{item.product.product_name} - {item.amount}' for item in items]
 
 
 class ItemsOrderedSerializer(serializers.ModelSerializer):

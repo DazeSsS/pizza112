@@ -35,18 +35,22 @@ const CourierCard = ({item, setModalActive, index, currentStates, setCurrentStat
       </div>
       <div className={styles.body}>
         <div className={styles.order__info}>
-          <p>Время заказа: {item.time}</p>
-          <p>Время выдачи: {item.issueTime}</p>
-          <p>Стоимость заказа: {item.price}</p>
-          <p>Выдача: {item.issuance}</p>
-          <p>Количество позиций: {item.positionsNum}</p>
-          <p>Позиции: {item.positions}</p>  
+          <p>Время заказа: {item.date}</p>
+          <p>Время выдачи: {item.ready_time}</p>
+          <p>Стоимость заказа: {item.total}</p>
+          <p>Выдача: {item.delivery_type}</p>
+          <p>Количество позиций: {item.items_count}</p>
+          <p>Позиции: {item.items_in_order
+              ? item.items_in_order.join(', ')
+              : ''
+            }
+          </p>   
         </div>
         <div className={styles.client__info}>
-        <p>Клиент: {item.client}</p> 
-        <p>Номер: {item.clientPhone}</p>
-        <p>Эл. почта: {item.clientMail}</p>
-        <p>Адрес доставки: {item.clientAdress}</p>
+        <p>Клиент: {item.customer_name}</p> 
+        <p>Номер: {item.customer_phone_number}</p>
+        <p>Эл. почта: {item.customer_email}</p>
+        <p>Адрес доставки: {item.address}</p>
         </div>
       </div>
     </>

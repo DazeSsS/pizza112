@@ -6,30 +6,33 @@ import { getToken } from '../../utils/authToken';
 import { getCurrentUser } from '../../utils/userData';
 
 const Menu = () => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (getToken()) {
       getCurrentUser(setUser);
-    }
-  }, [navigate]);
+    } 
+  }, []);
 
-  if (getToken()) {
-    switch (user.role) {
-      case 'Управляющий':
-        navigate('/home/');
-        break;
-      case 'Пекарь':
-        navigate('/baker/');
-        break;
-      case 'Курьер':
-        navigate('/courier/');
-        break;
-      default:
-        break;
+  useEffect(() => {
+    if (user) {
+      switch (user.role) {
+        case 'Управляющий':
+          navigate('/home/');
+          break;
+        case 'Пекарь':
+          navigate('/baker/');
+          break;
+        case 'Курьер':
+          navigate('/courier/');
+          break;
+        default:
+          console.log('error');
+          break;
+      }
     }
-  }
+  }, [user, navigate]);
 
   return (
       <div className={styles.container}>

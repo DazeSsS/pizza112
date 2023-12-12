@@ -35,11 +35,15 @@ const BakerCard = ({item, setModalActive, index, currentStates, setCurrentStates
       </div>
       <div className={styles.body}>
         <div className={styles.info}>
-          <p>Время заказа: {item.time}</p>
-          <p>Время готовности: {item.readyTime}</p>
-          <p>Выдача: {item.issuance}</p>
-          <p>Количество позиций: {item.positionsNum}</p>
-          <p>Позиции: {item.positions}</p>  
+          <p>Дата заказа: {item.date}</p>
+          <p>Время готовности: {item.ready_time}</p>
+          <p>Выдача: {item.delivery_type}</p>
+          <p>Количество позиций: {item.items_count}</p>
+          <p>Позиции: {item.items_in_order
+              ? item.items_in_order.join(', ')
+              : ''
+            }
+          </p>  
         </div>
       </div>
     </>

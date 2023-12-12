@@ -1,66 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import styles from './bakerTable.module.css';
 import { useState } from 'react';
 import Modal from "../modal/Modal";
 import BakerCard from "../baker-card/BakerCard";
 import { useEffect } from "react";
-
-let parameters = [
-  {
-    id: "gf-342",
-    state: "Завершён",
-    time:"12.12.12 12:00",
-    readyTime:"12.12.12 13:12",
-    issueTime:"12.12.12 14:12",
-    price:"1495",
-    positionsNum:"4",
-    positions:"рис курица курица рис рис",
-    issuance:"Самовывоз",
-    courier:"Иван Зорин",
-    baker:"Волчихин Артём",
-    client:"Владимир Тарасенко",
-    clientPhone:"+78439852873",
-    clientMail:"sussybaka2013@mail.ru",
-    clientAdress:"ул. Бассейная д.228",
-    courierPhone:"+78005553535"
-  },
-  {
-    id: "gf-442",
-    state: "Готовится",
-    time:"12.12.12 12:00",
-    readyTime:"12.12.12 13:12",
-    issueTime:"12.12.12 14:12",
-    price:"1495",
-    positionsNum:"4",
-    positions:"рис курица курица рис рис",
-    issuance:"Самовывоз",
-    courier:"Иван Зорин",
-    baker:"Елизавета Карамолина",
-    client:"Владимир Тарасенко",
-    clientPhone:"+78439852873",
-    clientMail:"sussybaka2013@mail.ru",
-    clientAdress:"ул. Бассейная д.228",
-    courierPhone:"+78005553535"
-  },
-  {
-    id: "gf-542",
-    state: "Отменён",
-    time:"12.12.12 12:00",
-    readyTime:"12.12.12 13:12",
-    issueTime:"12.12.12 14:12",
-    price:"1495",
-    positionsNum:"4",
-    positions:"рис курица курица рис рис",
-    issuance:"Самовывоз",
-    courier:"Иван Зорин",
-    baker:"Елизавета Карамолина",
-    client:"Владимир Тарасенко",
-    clientPhone:"+78439852873",
-    clientMail:"sussybaka2013@mail.ru",
-    clientAdress:"ул. Бассейная д.228",
-    courierPhone:"+78005553535"
-  }
-]
+import { getBakerOrders } from '../../utils/userData';
 
 export const STATES = {
   'Завершён': styles.green,
@@ -69,17 +14,24 @@ export const STATES = {
   'Доставка': styles.blue,
 }
 
-const BakerTable = (Baker = "") => {
+const BakerTable = ({ employee }) => {
   const [modalActive, setModalActive] = useState(false);
-  const [currentOrder, setCurrentOrder] = useState(parameters[0]);
+  const [orders, setOrders] = useState(null);
+  const [currentOrder, setCurrentOrder] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentStates, setCurrentStates] = useState([]);
 
   useEffect(() => {
-    setCurrentStates(parameters.map(item => item.state));
-  }, []);
+    getBakerOrders(employee, setOrders);
+  }, [employee]);
 
-  const rows = parameters.map((item, index) => (
+  useEffect(() => {
+    if (orders) {
+      setCurrentStates(orders.map(item => item.status));
+    }
+  }, [orders]);
+
+  const rows = orders?.map((item, index) => (
     <tr key={item.id} className={styles.row}>
       <td>
       <button className={styles.openButton} onClick={() => {
@@ -111,10 +63,13 @@ const BakerTable = (Baker = "") => {
           ))}
         </select>
       </td>
-      <td>{item.time}</td>
-      <td>{item.readyTime}</td>
-      <td>{item.positionsNum}</td>
-      <td>{item.issuance}</td>
+      <td>{item.date}</td>
+      {item.ready_time
+        ? <td>{item.ready_time}</td>
+        : <td>-</td>
+      }
+      <td>{item.items_count}</td>
+      <td>{item.delivery_type}</td>
     </tr>
   ));
 
@@ -125,7 +80,7 @@ const BakerTable = (Baker = "") => {
           <tr className={styles.header}>
             <th className={styles.id}>id заказа</th>
             <th>Cтатус</th>
-            <th>Время зак.</th>
+            <th>Дата заказа</th>
             <th>Время готовн.</th>
             <th>Позиций</th>
             <th className={styles.last}>Выдача</th>

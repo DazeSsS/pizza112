@@ -62,13 +62,13 @@ class Order(models.Model):
     ]
     delivery_type = models.CharField(
         max_length=9,
-        choices=STATUS_CHOICES,
+        choices=DELIVERY_TYPE_CHOICES,
         default=PICKUP
     )
 
     date = models.DateField()
-    order_ready_time = models.TimeField(null=True, blank=True)
-    order_delivered_time = models.TimeField(null=True, blank=True)
+    ready_time = models.TimeField(null=True, blank=True)
+    delivered_time = models.TimeField(null=True, blank=True)
     employee = models.ForeignKey(Employee, null=True, on_delete=models.SET_NULL, related_name="orders_cooking")
     customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)
     address = models.CharField(max_length=255)

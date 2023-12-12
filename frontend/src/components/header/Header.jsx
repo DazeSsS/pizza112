@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import styles from './header.module.css';
 import websiteLogo from './../../img/logo.svg';
 import profileLogo from './../../img/profileLogo.svg';
@@ -8,37 +7,15 @@ import { useState } from 'react';
 import Modal from "../modal/Modal";
 import EmployeeCard from '../employee-card/EmployeeCard';
 import CourierProfile from '../courier-profile/CourierProfile';
-import { getCurrentUser } from '../../utils/userData';
-import { getToken } from '../../utils/authToken';
 
 // У функции header теперь параметр view с 4 значениями: home, orders, employees, baker: с тремя хедерами для разных страничек
 
-// const currentEmployee = {
-//   id: '45dsfsdfw3f',
-//   img: '../../../public/images/profile',
-//   name: 'Волчихин Артём',
-//   position: 'Пекарь',
-//   number: '89091453724',
-//   gender: 'Мужской',
-//   age: '20',
-//   birthdate: '02.11.2004',
-//   firstWorkDay: '01.06.2022',
-//   salary: '55000'
-// } 
-
-const Header = ({view}) => {
+const Header = ({view, employee}) => {
   const [modalActive, setModalActive] = useState(false);
-  const [employee, setEmployee] = useState({});
   let logo;
   let text;
   let a;
   let pageName;
-
-  useEffect(() => {
-    if (getToken()){
-      getCurrentUser(setEmployee);
-    }
-  }, []);
 
   if (view === "home") {
     return (

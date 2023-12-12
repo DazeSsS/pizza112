@@ -13,7 +13,6 @@ const SignUp = () => {
   
   const onSignUpSubmit = async (evt) => {
     evt.preventDefault();
-    console.log(role);
 
     try {
       await axios.post(
@@ -21,7 +20,8 @@ const SignUp = () => {
         {
           username: username,
           password: password,
-          role: role
+          role: role,
+          is_staff: role === 'Управляющий' ? true : false
         }
       );
 

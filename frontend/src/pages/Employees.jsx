@@ -2,21 +2,31 @@ import Header from '../components/header/Header';
 import EmployeeTable from '../components/employee-table/EmployeeTable'
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '../utils/authToken';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { getCurrentUser } from '../utils/userData';
 
 function Orders () {
+  const [employee, setEmployee] = useState(null);
   const navigate = useNavigate();
-
+  
   useEffect(() => {
-    if (!getToken()) {
+    if (getToken()){
+      getCurrentUser(setEmployee);
+    } else {
       navigate('/');
     }
   }, [navigate]);
-
+  
   return (
     <>
-      <Header view="employees"/>
-      <EmployeeTable />
+      {!employee ? (
+        <h2>Loading...</h2>
+      ) : (
+        <>
+          <Header view="employees" employee={employee}/>
+          <EmployeeTable />
+        </>
+      )}
     </>
   );
 };

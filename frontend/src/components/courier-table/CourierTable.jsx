@@ -4,66 +4,7 @@ import { useState } from 'react';
 import Modal from "../modal/Modal";
 import CourierCard from "../courier-card/CourierCard";
 import { useEffect } from "react";
-
-let parameters = [
-  {
-    id: "gf-342",
-    state: "Завершён",
-    time:"12.12.12 12:00",
-    readyTime:"12.12.12 13:12",
-    issueTime:"12.12.12 14:12",
-    deliveryTime: "08.12.23 12:32",
-    price:"1495",
-    positionsNum:"4",
-    positions:"рис курица курица рис рис",
-    issuance:"Самовывоз",
-    courier:"Иван Зорин",
-    baker:"Волчихин Артём",
-    client:"Владимир Тарасенко",
-    clientPhone:"+78439852873",
-    clientMail:"sussybaka2013@mail.ru",
-    clientAdress:"ул. Бассейная д.228",
-    courierPhone:"+78005553535"
-  },
-  {
-    id: "gf-442",
-    state: "Готовится",
-    time:"12.12.12 12:00",
-    readyTime:"12.12.12 13:12",
-    issueTime:"12.12.12 14:12",
-    deliveryTime: "09.12.23 12:32",
-    price:"1495",
-    positionsNum:"4",
-    positions:"рис курица курица рис рис",
-    issuance:"Самовывоз",
-    courier:"Иван Зорин",
-    baker:"Елизавета Карамолина",
-    client:"Владимир Тарасенко",
-    clientPhone:"+78439852873",
-    clientMail:"sussybaka2013@mail.ru",
-    clientAdress:"ул. Бассейная д.228",
-    courierPhone:"+78005553535"
-  },
-  {
-    id: "gf-542",
-    state: "Отменён",
-    time:"12.12.12 12:00",
-    readyTime:"12.12.12 13:12",
-    issueTime:"12.12.12 14:12",
-    deliveryTime: "10.12.23 12:32",
-    price:"1495",
-    positionsNum:"4",
-    positions:"рис курица курица рис рис",
-    issuance:"Самовывоз",
-    courier:"Иван Зорин",
-    baker:"Елизавета Карамолина",
-    client:"Владимир Тарасенко",
-    clientPhone:"+78439852873",
-    clientMail:"sussybaka2013@mail.ru",
-    clientAdress:"ул. Бассейная д.228",
-    courierPhone:"+78005553535"
-  }
-]
+import { getCourierOrders } from '../../utils/userData';
 
 export const STATES = {
   'Завершён': styles.green,
@@ -72,17 +13,24 @@ export const STATES = {
   'Доставка': styles.blue,
 }
 
-const CourierTable = (Courier = "") => {
+const CourierTable = ({ employee }) => {
   const [modalActive, setModalActive] = useState(false);
-  const [currentOrder, setCurrentOrder] = useState(parameters[0]);
+  const [orders, setOrders] = useState([]);
+  const [currentOrder, setCurrentOrder] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentStates, setCurrentStates] = useState([]);
 
   useEffect(() => {
-    setCurrentStates(parameters.map(item => item.state));
-  }, []);
+    getCourierOrders(employee, setOrders);
+  }, [employee]);
 
-  const rows = parameters.map((item, index) => (
+  useEffect(() => {
+    if (orders) {
+      setCurrentStates(orders.map(item => item.status));
+    }
+  }, [orders]);
+
+  const rows = orders?.map((item, index) => (
     <tr key={item.id} className={styles.row}>
       <td>
       <button className={styles.openButton} onClick={() => {
@@ -114,7 +62,7 @@ const CourierTable = (Courier = "") => {
           ))}
         </select>
       </td>
-      <td>{item.deliveryTime}</td>
+      <td>{item.order_due}</td>
     </tr>
   ));
 
@@ -125,7 +73,7 @@ const CourierTable = (Courier = "") => {
           <tr className={styles.header}>
             <th className={styles.id}>id заказа</th>
             <th>Cтатус</th>
-            <th className={styles.last}>Время дост.</th>
+            <th className={styles.last}>Время доставки</th>
           </tr>
   
           {rows}

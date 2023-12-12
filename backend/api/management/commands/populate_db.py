@@ -22,6 +22,7 @@ class Command(BaseCommand):
             middle_name="Владимирович",
             phone_number="+79592331342",
             role="Управляющий",
+            is_staff=True,
             first_work_day=first_day_preset,
             last_work_day=last_day_preset,
             salary=50000
@@ -111,7 +112,8 @@ class Command(BaseCommand):
             customer=customer_3, 
             address='ш. Приколов, дом 228, кв. 54', 
             order_due=due_preset, 
-            total=730)
+            total=730
+        )
         order_2 = Order.objects.create(
             status="Готовится", 
             delivery_type="Доставка", 
@@ -121,11 +123,12 @@ class Command(BaseCommand):
             address='ул. Мира, дом 32, кв. 204', 
             order_due=due_preset, 
             total=1200, 
-            courier=employee_3)
+            courier=employee_3
+        )
         order_3 = Order.objects.create(
             status="Завершён",
-            order_ready_time=order_ready,
-            order_delivered_time=order_delivered,
+            ready_time=order_ready,
+            delivered_time=order_delivered,
             delivery_type="Доставка", 
             date=last_day_preset, 
             employee=employee_2, 
@@ -133,11 +136,12 @@ class Command(BaseCommand):
             address='ул. Сериализаторская, дом 1, кв. 2', 
             order_due=due_preset, 
             total=1200, 
-            courier=employee_3)
+            courier=employee_3
+        )
         order_4 = Order.objects.create(
-            status="Готовится",
-            order_ready_time=order_ready,
-            order_delivered_time=order_delivered,
+            status="Завершён",
+            ready_time=order_ready,
+            delivered_time=order_delivered,
             delivery_type="Доставка", 
             date=last_day_preset, 
             employee=employee_2, 
@@ -145,7 +149,21 @@ class Command(BaseCommand):
             address='ул. Нулл, дом 128, кв. 256', 
             order_due=due_preset, 
             total=1200, 
-            courier=employee_3)
+            courier=employee_3
+        )
+        order_5 = Order.objects.create(
+            status="Завершён",
+            ready_time=order_ready,
+            delivered_time=order_delivered,
+            delivery_type="Доставка",
+            date=last_day_preset,
+            employee=employee_2,
+            customer=customer_2,
+            address='ул. Нулл, дом 128, кв. 256', 
+            order_due=due_preset, 
+            total=1200, 
+            courier=employee_3
+        )
 
         items_ordered_1 = ItemsOrdered.objects.create(order=order_1, product=product_2, amount=2)
         items_ordered_2 = ItemsOrdered.objects.create(order=order_2, product=product_4, amount=5)
