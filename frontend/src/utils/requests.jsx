@@ -18,4 +18,17 @@ const getData = (url, setData) => {
   });
 };
 
-export { getData };
+const updateData = (url, data) => {
+  axios.patch(
+    url,
+    data,
+    {
+      headers: {
+        'Authorization': `Token ${getToken()}`
+      }
+    }
+  )
+  .catch(error => console.log(error));
+};
+
+export { getData, updateData };

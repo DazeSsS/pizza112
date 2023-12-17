@@ -38,30 +38,13 @@ const BakerTable = ({ employee }) => {
           setModalActive(true);
           setCurrentOrder(item);
           setCurrentIndex(index);
-        }}>
+        }}
+      >
         {item.id}
       </button>
       </td>
       <td className={styles.state}>
-        <select 
-          className={STATES[currentStates[index]]}
-          value={currentStates[index]}
-          onChange={e => setCurrentStates(prev => [
-            ...(prev.slice(0, index)),
-            e.target.value,
-            ...(prev.slice(index + 1))
-          ])}
-        >
-          {Object.keys(STATES).map((state) => (
-            <option 
-              key={state}
-              className={STATES[state]}
-              value={state}
-            >
-              {state}
-            </option>
-          ))}
-        </select>
+        <div className={STATES[currentStates[index]]}>{currentStates[index]}</div>
       </td>
       <td>{item.date}</td>
       {item.ready_time
@@ -93,6 +76,7 @@ const BakerTable = ({ employee }) => {
       <Modal active={modalActive} setActive={setModalActive} size="baker">
         <BakerCard
           item={currentOrder}
+          modalActive={modalActive}
           setModalActive={setModalActive}
           index={currentIndex}
           currentStates={currentStates}

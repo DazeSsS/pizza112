@@ -1,4 +1,4 @@
-import { getData } from './requests';
+import { getData, updateData } from './requests';
 
 const getCurrentUser = (setEmployee) => {
   getData(
@@ -35,5 +35,12 @@ const getCourierOrders = (employee, setOrders) => {
   );
 };
 
+const updateOrder = (order, data) => {
+  updateData(
+    `http://127.0.0.1:8000/api/v1/orders/${order.id}/`,
+    data
+  );
+}
 
-export { getCurrentUser, getEmployees, getOrders, getBakerOrders, getCourierOrders };
+
+export { getCurrentUser, getEmployees, getOrders, getBakerOrders, getCourierOrders, updateOrder };

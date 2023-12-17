@@ -1,36 +1,42 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import ListAPIView
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
+from .permissions import IsManager, IsOwner
 from .serializers import *
 from .models import *
-
-
-class CustomerViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Customer.objects.all()
-    serializer_class = CustomerSerializer
-    # permission_classes = [IsAuthenticated]
-
-
-class ProductViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    # permission_classes = [IsAuthenticated]
     
 
-class OrderViewSet(viewsets.ModelViewSet):
+class OrdersList(ListAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    # permission_classes = [IsAuthenticated]
-    
+    permission_classes = [IsManager]
 
-class ItemsOrderedViewSet(viewsets.ModelViewSet):
-    queryset = ItemsOrdered.objects.all()
-    serializer_class = ItemsOrderedSerializer
-    # permission_classes = [IsAuthenticated]
+
+class CurrentOrder(APIView):
+    permission_classes = [IsOwner|IsManager]
+
+    def get_object(self, pk):
+        order = Order.objects.get(pk=pk)
+        self.check_object_permissions(self.request, order)
+        return order
+
+    def get(self, request, order_id):
+        order = self.get_object(order_id)
+        serializer = OrderSerializer(order)
+        return Response(serializer.data)
+    
+    def patch(self, request, order_id):
+        order = self.get_object(order_id)
+        serializer = OrderSerializer(order, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            
+        return Response(serializer.data)
 
 
 class CurrentEmployee(APIView):

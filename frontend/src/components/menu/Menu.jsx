@@ -42,11 +42,11 @@ const Menu = () => {
         <div>
             <div className={styles.types}>
               <div className={styles.type}>
-                <Link to="/LogIn" className={styles.type__link}></Link>
+                <Link to="/login" className={styles.type__link}></Link>
                 <span>Вход</span>
               </div>
               <div className={styles.type}>
-                <Link to="/SignUp" className={styles.type__link}></Link>
+                <Link to="/signup" className={styles.type__link}></Link>
                 <span>Регистрация</span>
               </div>
             </div>

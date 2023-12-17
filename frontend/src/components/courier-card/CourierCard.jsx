@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './courierCard.module.css'
 import closeButton from '../../img/closeButton.svg'
 import { STATES } from '../courier-table/CourierTable';
+import { updateOrder } from '../../utils/userData';
 
-const CourierCard = ({item, setModalActive, index, currentStates, setCurrentStates}) => {  
+const CourierCard = ({item, modalActive, setModalActive, index, currentStates, setCurrentStates}) => {
+  const [orderStatus, setOrderStatus] = useState('');
+  const [saveButtonDisabled, setSaveButtonDisabled] = useState(true);
+
+  useEffect(() => {
+    setOrderStatus(currentStates[index]);
+    setSaveButtonDisabled(true);
+  }, [currentStates, index, modalActive]);
+
   return(
     <>
       <div className={styles.header}>
         <div className={styles.state}>
         <select 
-            className={STATES[currentStates[index]]}
-            value={currentStates[index]}
-            onChange={e => setCurrentStates(prev => [
-              ...(prev.slice(0, index)),
-              e.target.value,
-              ...(prev.slice(index + 1))
-            ])}
+            className={STATES[orderStatus]}
+            value={orderStatus}
+            onChange={(evt) => {
+              setOrderStatus(evt.target.value);
+              setSaveButtonDisabled(false);
+            }}
         >
           {Object.keys(STATES).map((state) => (
             <option 
@@ -28,6 +36,20 @@ const CourierCard = ({item, setModalActive, index, currentStates, setCurrentStat
           ))}
         </select>
         </div>
+        <button
+          style={{padding: '10px', cursor: 'pointer'}}
+          disabled={saveButtonDisabled}
+          onClick={() => {
+            updateOrder(item, {status: orderStatus});
+            setCurrentStates(prev => [
+              ...(prev.slice(0, index)),
+              orderStatus,
+              ...(prev.slice(index + 1))
+            ]);
+          }}
+        >
+          Сохранить
+        </button>
         <p className={styles.id}>Заказ: {item.id}</p>
         <button className={styles.close__button} onClick={() => setModalActive(false)}>
           <img src={closeButton} alt="" height='30px' width='30px' />

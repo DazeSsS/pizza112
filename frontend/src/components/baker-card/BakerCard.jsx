@@ -1,34 +1,56 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './bakerCard.module.css'
 import closeButton from '../../img/closeButton.svg'
 import { STATES } from '../baker-table/BakerTable';
+import { updateOrder } from '../../utils/userData';
 
-const BakerCard = ({item, setModalActive, index, currentStates, setCurrentStates}) => {  
+const BakerCard = ({item, modalActive, setModalActive, index, currentStates, setCurrentStates}) => {
+  const [orderStatus, setOrderStatus] = useState('');
+  const [saveButtonDisabled, setSaveButtonDisabled] = useState(true);
+
+  useEffect(() => {
+    setOrderStatus(currentStates[index]);
+    setSaveButtonDisabled(true);
+  }, [currentStates, index, modalActive]);
+
   return(
     <>
       <div className={styles.header}>
         <p className={styles.id}>Заказ: {item.id}</p>
         <div className={styles.state}>
-        <select 
-            className={STATES[currentStates[index]]}
-            value={currentStates[index]}
-            onChange={e => setCurrentStates(prev => [
-              ...(prev.slice(0, index)),
-              e.target.value,
-              ...(prev.slice(index + 1))
-            ])}
-        >
-          {Object.keys(STATES).map((state) => (
-            <option 
-              key={state}
-              className={STATES[state]}
-              value={state}
-            >
-              {state}
-            </option>
-          ))}
-        </select>
+          <select 
+              className={STATES[orderStatus]}
+              value={orderStatus}
+              onChange={(evt) => {
+                setOrderStatus(evt.target.value);
+                setSaveButtonDisabled(false);
+              }}
+          >
+            {Object.keys(STATES).map((state) => (
+              <option 
+                key={state}
+                className={STATES[state]}
+                value={state}
+              >
+                {state}
+              </option>
+            ))}
+          </select>
         </div>
+        <button
+          style={{padding: '10px', cursor: 'pointer'}}
+          disabled={saveButtonDisabled}
+          onClick={() => {
+            updateOrder(item, {status: orderStatus});
+            setCurrentStates(prev => [
+              ...(prev.slice(0, index)),
+              orderStatus,
+              ...(prev.slice(index + 1))
+            ]);
+          }}
+        >
+          Сохранить
+        </button>
         <button className={styles.close__button} onClick={() => setModalActive(false)}>
           <img src={closeButton} alt="" />
         </button>

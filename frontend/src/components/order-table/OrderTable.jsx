@@ -1,9 +1,9 @@
 import React from "react";
-import styles from './orderTable.module.css';
 import { useState, useEffect } from 'react';
 import Modal from "../modal/Modal";
 import OrderCard from "../order-card/OrderCard";
 import { getOrders } from '../../utils/userData';
+import styles from './orderTable.module.css';
 
 export const STATES = {
   'Завершён': styles.green,
@@ -30,39 +30,24 @@ const OrderTable = () => {
   const rows = orders.map((item, index) => (
     <tr key={item.id} className={styles.row}>
       <td>
-      <button className={styles.openButton} onClick={() => {
+      <button
+        className={styles.openButton}
+        onClick={() => {
           setModalActive(true);
           setCurrentOrder(item);
           setCurrentIndex(index);
-        }}>
+        }}
+      >
         {item.id}
       </button>
       </td>
       <td className={styles.state}>
-        <select 
-          className={STATES[currentStates[index]]}
-          value={currentStates[index]}
-          onChange={e => setCurrentStates(prev => [
-            ...(prev.slice(0, index)),
-            e.target.value,
-            ...(prev.slice(index + 1))
-          ])}
-        >
-          {Object.keys(STATES).map((state) => (
-            <option 
-              key={state}
-              className={STATES[state]}
-              value={state}
-            >
-              {state}
-            </option>
-          ))}
-        </select>
+        <div className={STATES[currentStates[index]]}>{currentStates[index]}</div>
       </td>
       <td>{item.date}</td>
       <td>{item.items_count}</td>
       <td>{item.delivery_type}</td>
-      {item.courier_first_name 
+      {item.courier_first_name
         ? <td>{item.courier_first_name} {item.courier_last_name}</td>
         : <td>-</td>
       }
@@ -93,6 +78,7 @@ const OrderTable = () => {
       <Modal active={modalActive} setActive={setModalActive}>
         <OrderCard
           item={currentOrder}
+          modalActive={modalActive}
           setModalActive={setModalActive}
           index={currentIndex}
           currentStates={currentStates}
