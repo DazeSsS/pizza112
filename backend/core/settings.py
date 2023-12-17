@@ -109,6 +109,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 DJOSER = {
+    'HIDE_USERS': False,
+    'PERMISSIONS': {
+        'user_list': [
+            'api.permissions.IsManager',
+            'djoser.permissions.CurrentUserOrAdmin'
+        ]
+    },
     'SERIALIZERS': {
         'user_create': 'api.serializers.EmployeeSerializer',
         'user_delete': 'api.serializers.EmployeeSerializer',

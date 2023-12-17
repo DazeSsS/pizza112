@@ -22,7 +22,6 @@ class Command(BaseCommand):
             middle_name="Владимирович",
             phone_number="+79592331342",
             role="Управляющий",
-            is_staff=True,
             first_work_day=first_day_preset,
             last_work_day=last_day_preset,
             salary=50000

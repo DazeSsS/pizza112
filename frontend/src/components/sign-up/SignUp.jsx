@@ -20,8 +20,7 @@ const SignUp = () => {
         {
           username: username,
           password: password,
-          role: role,
-          is_staff: role === 'Управляющий' ? true : false
+          role: role
         }
       );
 
