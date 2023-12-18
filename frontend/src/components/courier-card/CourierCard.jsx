@@ -37,7 +37,7 @@ const CourierCard = ({item, modalActive, setModalActive, index, currentStates, s
         </select>
         </div>
         <button
-          style={{padding: '10px', cursor: 'pointer'}}
+          className={styles.saveButton}
           disabled={saveButtonDisabled}
           onClick={() => {
             updateOrder(item, {status: orderStatus});

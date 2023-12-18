@@ -38,7 +38,7 @@ const BakerCard = ({item, modalActive, setModalActive, index, currentStates, set
           </select>
         </div>
         <button
-          style={{padding: '10px', cursor: 'pointer'}}
+          className={styles.saveButton}
           disabled={saveButtonDisabled}
           onClick={() => {
             updateOrder(item, {status: orderStatus});

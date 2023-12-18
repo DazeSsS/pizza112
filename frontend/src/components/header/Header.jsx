@@ -54,6 +54,9 @@ const Header = ({view, employee}) => {
               <span>{employee.username}</span>
               <img src={profileLogo} width="90px" height="90px" alt="ProfileLogo"/>
             </button>
+            <button className={styles.exit}>
+              Выход
+            </button>
           </div>
           <h1 className={styles.pageName}>Данные заказов</h1>
         </div>
@@ -80,6 +83,9 @@ const Header = ({view, employee}) => {
               }}>
               <span>{employee.username}</span>
               <img src={profileLogo} width="45px" height="45px" alt="ProfileLogo"/>
+            </button>
+            <button className={styles.exitCourier}>
+              Выход
             </button>
           </div>
           <h1 className={styles.courier__pageName}>Данные заказов</h1>
@@ -127,6 +133,9 @@ const Header = ({view, employee}) => {
               <span>{employee.username}</span>
               <img src={profileLogo} width="90px" height="90px" alt="ProfileLogo"/>
             </div>
+            <button className={styles.exit}>
+              Выход
+            </button>
           </div>
           <h1 className={styles.pageName}>{pageName}</h1>
         </div>

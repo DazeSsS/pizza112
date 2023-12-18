@@ -18,7 +18,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  column-gap: 30px;
+  gap: 110px;
 }
 
 .header__row button{
@@ -144,4 +144,20 @@ input:focus {
   line-height: normal;
   display: flex;
   justify-content: center;
+}
+
+.exitCourier{
+  font-family: Fira Mono;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 200;
+  line-height: normal;
+}
+
+.exit{
+  font-family: Fira Mono;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }

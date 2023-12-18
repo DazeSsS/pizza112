@@ -127,3 +127,20 @@
   font-weight: 400;
   line-height: 38px;
 }
+
+.saveButton{
+  padding: 0 10px 0 10px;
+  cursor: pointer;
+  font-family: Fira Mono;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 200;
+  line-height: 38px;
+  border-radius: 50px;
+  background-color: white;
+  margin-top: 10px;
+}
+
+.saveButton:hover{
+  filter:brightness(0.95);
+}
