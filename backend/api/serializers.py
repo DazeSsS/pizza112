@@ -97,12 +97,24 @@ class ItemsOrderedSerializer(serializers.ModelSerializer):
 class EmployeeSerializer(serializers.ModelSerializer):
     password = serializers.CharField(style={"input_type": "password"}, write_only=True, required=True)
 
-    # orders_cooking = OrderSerializer(many=True, read_only=True)
-    # orders_delivering = OrderSerializer(many=True, read_only=True)
-
     class Meta:
         model = Employee
-        fields = '__all__'
+        fields = [
+            'id',
+            'username',
+            'password',
+            'first_name',
+            'middle_name',
+            'last_name',
+            'gender',
+            'is_staff',
+            'role',
+            'email',
+            'phone_number',
+            'first_work_day',
+            'last_work_day',
+            'salary'
+        ]
 
     def create(self, validated_data):
         validated_data['password'] = make_password(validated_data.get('password'))

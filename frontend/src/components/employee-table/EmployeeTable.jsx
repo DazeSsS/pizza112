@@ -46,11 +46,11 @@ const EmployeeTable = () => {
             <th className={styles.age}>Возраст</th>
           </tr>
           {rows}
-          <Modal active={modalActive} setActive={setModalActive}>
-            <EmployeeCard item={currentEmployee} setModalActive={setModalActive}/>
-          </Modal>
         </tbody>
       </table>
+      <Modal active={modalActive} setActive={setModalActive}>
+        <EmployeeCard item={currentEmployee} setModalActive={setModalActive}/>
+      </Modal>
     </div>
     
   )

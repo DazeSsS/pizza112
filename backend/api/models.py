@@ -11,10 +11,19 @@ class Employee(AbstractUser):
         (FEMALE, 'Ж')
     ]
 
+    MANAGER = 'Управляющий'
+    BAKER = 'Пекарь'
+    COURIER = 'Курьер'
+    ROLE_CHOICES = [
+        (MANAGER, 'manager'),
+        (BAKER, 'baker'),
+        (COURIER, 'courier')
+    ]
+
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default=MALE)
     middle_name = models.CharField(max_length=25, blank=True, null=True)
     phone_number = models.CharField(max_length=12, blank=True, null=True)
-    role = models.CharField(max_length=25)
+    role = models.CharField(max_length=25, choices=ROLE_CHOICES)
     first_work_day = models.DateField(blank=True, null=True)
     last_work_day = models.DateField(blank=True, null=True)
     salary = models.PositiveIntegerField(default=0)
@@ -48,11 +57,6 @@ class Order(models.Model):
         (CANCELLED, "cancelled"),
         (DELIVERY, "delivery"),
     ]
-    status = models.CharField(
-        max_length=9,
-        choices=STATUS_CHOICES,
-        default=COOKING,
-    )
 
     PICKUP = "Cамовывоз"
     DELIVERY = "Доставка"
@@ -60,14 +64,11 @@ class Order(models.Model):
         (PICKUP, "pickup"),
         (DELIVERY, "delivery")
     ]
-    delivery_type = models.CharField(
-        max_length=9,
-        choices=DELIVERY_TYPE_CHOICES,
-        default=PICKUP
-    )
 
+    status = models.CharField(max_length=9, choices=STATUS_CHOICES, default=COOKING)
     date = models.DateField()
     ready_time = models.TimeField(null=True, blank=True)
+    delivery_type = models.CharField(max_length=9, choices=DELIVERY_TYPE_CHOICES, default=PICKUP)
     delivered_time = models.TimeField(null=True, blank=True)
     employee = models.ForeignKey(Employee, null=True, on_delete=models.SET_NULL, related_name="orders_cooking")
     customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)
