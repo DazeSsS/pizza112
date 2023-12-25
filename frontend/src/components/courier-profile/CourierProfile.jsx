@@ -32,9 +32,9 @@ const CourierProfile = ({item, setModalActive}) => {
             <span>Последний рабочий день: {item.last_work_day}</span>
             <span>Заработная плата: {item.salary} рублей</span>
             <span className={styles.salary}>Квиток о зп:  
-              <button className={styles.download}>
+              <a href="docs/pizza112salary.xlsx" download className={styles.download}>
                 <img src={salaryLogo} height="35px" width="35px" alt="" />
-              </button>
+              </a>
             </span>
           </div>
         </div>
