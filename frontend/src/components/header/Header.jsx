@@ -2,20 +2,43 @@ import styles from './header.module.css';
 import websiteLogo from './../../img/logo.svg';
 import profileLogo from './../../img/profileLogo.svg';
 import orderLogo from './../../img/orderLogo.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Modal from "../modal/Modal";
 import EmployeeCard from '../employee-card/EmployeeCard';
 import CourierProfile from '../courier-profile/CourierProfile';
+import axios from 'axios';
+import { deleteToken, getToken } from '../../utils/authToken';
 
 // У функции header теперь параметр view с 4 значениями: home, orders, employees, baker: с тремя хедерами для разных страничек
 
 const Header = ({view, employee}) => {
   const [modalActive, setModalActive] = useState(false);
+  const navigate = useNavigate();
+
   let logo;
   let text;
   let a;
   let pageName;
+
+  const logOut = async () => {
+    try {
+      await axios.post(
+        'http://127.0.0.1:8000/auth/token/logout/',
+        {},
+        {
+          headers: {
+            'Authorization': `Token ${getToken()}`
+          }
+        }
+      );
+
+      deleteToken();
+      navigate('/');
+    } catch (error) {
+      console.log(error)
+    }
+  };
 
   if (view === "home") {
     return (
@@ -29,6 +52,9 @@ const Header = ({view, employee}) => {
             <div className={styles.profile__information}>
               <span>{employee.username}</span>
               <img src={profileLogo} width="90px" height="90px" alt="ProfileLogo"/>
+              <button className={styles.exit} onClick={logOut}>
+                Выход
+              </button>
             </div>
           </div>
         </div>
@@ -54,7 +80,7 @@ const Header = ({view, employee}) => {
               <span>{employee.username}</span>
               <img src={profileLogo} width="90px" height="90px" alt="ProfileLogo"/>
             </button>
-            <button className={styles.exit}>
+            <button className={styles.exit} onClick={logOut}>
               Выход
             </button>
           </div>
@@ -84,7 +110,7 @@ const Header = ({view, employee}) => {
               <span>{employee.username}</span>
               <img src={profileLogo} width="45px" height="45px" alt="ProfileLogo"/>
             </button>
-            <button className={styles.exitCourier}>
+            <button className={styles.exitCourier} onClick={logOut}>
               Выход
             </button>
           </div>
@@ -133,7 +159,7 @@ const Header = ({view, employee}) => {
               <span>{employee.username}</span>
               <img src={profileLogo} width="90px" height="90px" alt="ProfileLogo"/>
             </div>
-            <button className={styles.exit}>
+            <button className={styles.exit} onClick={logOut}>
               Выход
             </button>
           </div>
