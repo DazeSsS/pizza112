@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 from .models import *
+from datetime import datetime
 
 
 class CustomerSerializer(serializers.ModelSerializer):
@@ -96,7 +97,7 @@ class ItemsOrderedSerializer(serializers.ModelSerializer):
 
 class EmployeeSerializer(serializers.ModelSerializer):
     password = serializers.CharField(style={"input_type": "password"}, write_only=True, required=True)
-
+    age = serializers.SerializerMethodField()
     class Meta:
         model = Employee
         fields = [
@@ -113,9 +114,18 @@ class EmployeeSerializer(serializers.ModelSerializer):
             'phone_number',
             'first_work_day',
             'last_work_day',
-            'salary'
+            'salary',
+            'age',
+            'birth_date'
         ]
 
     def create(self, validated_data):
         validated_data['password'] = make_password(validated_data.get('password'))
         return super(EmployeeSerializer, self).create(validated_data)
+    
+    def get_age(self, obj):
+        if obj.birth_date:
+            today = datetime.now()
+            age = today.year - obj.birth_date.year - ((today.month, today.day) < (obj.birth_date.month, obj.birth_date.day))
+            return age
+        return None

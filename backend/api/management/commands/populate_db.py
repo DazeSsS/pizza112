@@ -9,6 +9,8 @@ last_day_preset = datetime.date(2024, 6, 5)
 due_preset = datetime.datetime(2023, 12, 6, 23, 59, 59)
 order_ready = datetime.time(17, 23, 11)
 order_delivered = datetime.time(18, 37, 12)
+birth_date_preset = datetime.date(2004, 6, 5)
+birth_date_preset2 = datetime.date(2000, 1, 1)
 
 print("заполнение БД ...")
 
@@ -24,7 +26,8 @@ class Command(BaseCommand):
             role="Управляющий",
             first_work_day=first_day_preset,
             last_work_day=last_day_preset,
-            salary=50000
+            salary=50000,
+            birth_date=birth_date_preset
         )
 
         employee_2 = Employee.objects.create(
@@ -36,7 +39,8 @@ class Command(BaseCommand):
             phone_number="+79602341343",
             role="Пекарь",
             first_work_day=first_day_preset, last_work_day=last_day_preset,
-            salary=30000
+            salary=30000,
+            birth_date=birth_date_preset
         )
 
         employee_3 = Employee.objects.create(
@@ -49,7 +53,8 @@ class Command(BaseCommand):
             role="Курьер",
             first_work_day=first_day_preset,
             last_work_day=last_day_preset,
-            salary=26000
+            salary=26000,
+            birth_date=birth_date_preset
         )
 
         employee_4 = Employee.objects.create(
@@ -62,7 +67,8 @@ class Command(BaseCommand):
             role="Пекарь",
             first_work_day=first_day_preset,
             last_work_day=last_day_preset,
-            salary=22000
+            salary=22000,
+            birth_date=birth_date_preset
         )
 
         employee_5 = Employee.objects.create(
@@ -75,7 +81,8 @@ class Command(BaseCommand):
             role="Курьер",
             first_work_day=first_day_preset,
             last_work_day=last_day_preset,
-            salary=27000
+            salary=27000,
+            birth_date=birth_date_preset
         )
 
         employee_6 = Employee.objects.create(
@@ -89,7 +96,8 @@ class Command(BaseCommand):
             role="Пекарь",
             first_work_day=first_day_preset,
             last_work_day=last_day_preset,
-            salary=18000
+            salary=18000,
+            birth_date=birth_date_preset2
         )
 
         product_1 = Product.objects.create(product_name="pizza112", price=112)

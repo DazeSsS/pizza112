@@ -28,7 +28,7 @@ const EmployeeTable = () => {
       <td>{item.role}</td>
       <td>{item.phone_number}</td>
       <td>{item.gender}</td>
-      <td>19</td>
+      <td>{item.age}</td>
     </tr>
 
   });

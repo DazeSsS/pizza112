@@ -17,8 +17,8 @@ const EmployeeCard = ({item, setModalActive}) => {
         <div className={styles.employee__info}>
           <div className={styles.information}>
             <span>Должность: {item.role}</span>
-            <span>Дата рождения: {item.birthdate}</span>
-            <span>Возраст: {item.age} лет</span>
+            <span>Дата рождения: {item.birth_date}</span>
+            <span>Возраст: {item.age}</span>
             <span>Пол: {item.gender}</span>
             <span>Телефон: {item.phone_number}</span>
           </div>

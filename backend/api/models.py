@@ -27,6 +27,7 @@ class Employee(AbstractUser):
     first_work_day = models.DateField(blank=True, null=True)
     last_work_day = models.DateField(blank=True, null=True)
     salary = models.PositiveIntegerField(default=0)
+    birth_date = models.DateField(null=True, blank=True)
 
 
 class Customer(models.Model):

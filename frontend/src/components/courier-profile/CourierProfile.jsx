@@ -18,7 +18,7 @@ const CourierProfile = ({item, setModalActive}) => {
           <div className={styles.information}>
             <span>Должность: {item.role}</span>
             <span>Дата рождения: 01.01.2004</span>
-            <span>Возраст: 19 лет</span>
+            <span>Возраст: {item.age}</span>
             <span>Пол: {item.gender}</span>
             <span>Телефон: {item.phone_number}</span>
           </div>
