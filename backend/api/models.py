@@ -75,7 +75,7 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)
     address = models.CharField(max_length=255)
     order_due = models.DateTimeField(null=True, blank=True)
-    total = models.DecimalField(max_digits=10, decimal_places=2)
+    total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     courier = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True, related_name="orders_delivering")
     
 
