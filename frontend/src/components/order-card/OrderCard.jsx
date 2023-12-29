@@ -58,8 +58,8 @@ const OrderCard = ({item, modalActive, setModalActive, index, currentStates, set
       <div className={styles.blocks}>
         <div className={styles.left}>
           <p>Дата заказа: {item.date}</p>
-          <p>Время готовности: {item.order_ready_time}</p>
-          <p>Время выдачи: {item.order_delivered_time}</p>
+          <p>Время готовности: {item.ready_time}</p>
+          <p>Время выдачи: {item.delivered_time}</p>
           <p>Стоимость заказа: {item.total} рублей</p>
           <p>Выдача: {item.delivery_type}</p>
           <p>Количество позиций: {item.items_count}</p>
