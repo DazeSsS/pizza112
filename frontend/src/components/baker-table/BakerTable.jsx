@@ -14,25 +14,38 @@ export const STATES = {
   'Доставка': styles.blue,
 }
 
-const BakerTable = ({ employee }) => {
+const BakerTable = ({ employee, stateFilter="" }) => {
   const [modalActive, setModalActive] = useState(false);
   const [orders, setOrders] = useState(null);
   const [currentOrder, setCurrentOrder] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentStates, setCurrentStates] = useState([]);
-
+  let suitableOrders = orders;
   useEffect(() => {
     getBakerOrders(employee, setOrders);
   }, [employee]);
-
+  
   useEffect(() => {
-    if (orders) {
-      setCurrentStates(orders.map(item => item.status));
+    if (suitableOrders) {
+      setCurrentStates(suitableOrders.map(item => item.status));
     }
-  }, [orders]);
+  }, [suitableOrders]);
 
-  const rows = orders?.map((item, index) => (
-    <tr key={item.id} className={styles.row}>
+  if (stateFilter === "Appointed" && orders!=null) {
+    const suitableStates = ["Готовится", "Доставка"]
+    suitableOrders = orders.filter(element => {
+      return element.status === suitableStates[0] || element.status === suitableStates[1];
+    })
+  }
+  else if (stateFilter === "Ready" && orders!=null) {
+    const suitableStates = ["Завершён", "Отменён"]
+    suitableOrders = orders.filter(element => {
+      return element.status === suitableStates[0] || element.status === suitableStates[1];
+    })
+  }
+
+  const rows = suitableOrders?.map((item, index) => (
+    <tr key={item.id} className={styles.row} >
       <td>
       <button className={styles.openButton} onClick={() => {
           setModalActive(true);
