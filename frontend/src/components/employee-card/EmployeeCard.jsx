@@ -4,15 +4,18 @@ import styles from './employeeCard.module.css'
 import profileLogo from '../../img/profileLogo.svg'
 import closeButton from '../../img/closeButton.svg'
 import salaryLogo from '../../img/salary.svg'
-import { useState } from 'react';
 
-const EmployeeCard = ({item, setModalActive, setFilterState}) => {
+
+const EmployeeCard = ({item, setModalActive, setFilter}) => {
   const onAppointedClick = () => {
-    setFilterState("Appointed");
+    setFilter("Appointed");
+    setModalActive(false);
   }
   const onReadyClick = () => {
-    setFilterState("Ready");
+    setFilter("Ready");
+    setModalActive(false);
   }
+
   return (
     <>
       <div className={styles.employee__header}>

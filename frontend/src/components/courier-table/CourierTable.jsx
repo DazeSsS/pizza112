@@ -13,9 +13,10 @@ export const STATES = {
   'Доставка': styles.blue,
 }
 
-const CourierTable = ({ employee }) => {
+const CourierTable = ({ employee, filter }) => {
   const [modalActive, setModalActive] = useState(false);
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState(null);
+  const [filteredOrders, setFilteredOrders] = useState(null);
   const [currentOrder, setCurrentOrder] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentStates, setCurrentStates] = useState([]);
@@ -26,11 +27,33 @@ const CourierTable = ({ employee }) => {
 
   useEffect(() => {
     if (orders) {
-      setCurrentStates(orders.map(item => item.status));
+      setFilteredOrders(orders);
     }
   }, [orders]);
 
-  const rows = orders?.map((item, index) => (
+  useEffect(() => {
+    if (filteredOrders) {
+      setCurrentStates(filteredOrders.map(item => item.status));
+    }
+  }, [filteredOrders]);
+
+  useEffect(() => {
+    if (filter === "Appointed" && orders) {
+      const suitableStates = ["Готовится", "Доставка"]
+      const suitableOrders = orders.filter(element => {
+        return element.status === suitableStates[0] || element.status === suitableStates[1];
+      });
+      setFilteredOrders(suitableOrders);
+    } else if (filter === "Ready" && orders) {
+      const suitableStates = ["Завершён", "Отменён"]
+      const suitableOrders = orders.filter(element => {
+        return element.status === suitableStates[0] || element.status === suitableStates[1];
+      });
+      setFilteredOrders(suitableOrders);
+    }
+  }, [filter, orders]);
+
+  const rows = filteredOrders?.map((item, index) => (
     <tr key={item.id} className={styles.row}>
       <td>
       <button className={styles.openButton} onClick={() => {
@@ -44,7 +67,7 @@ const CourierTable = ({ employee }) => {
       <td className={styles.state}>
         <div className={STATES[currentStates[index]]}>{currentStates[index]}</div>
       </td>
-      <td>{item.order_due}</td>
+      <td>{item.order_due?.slice(11, 19)}</td>
     </tr>
   ));
 

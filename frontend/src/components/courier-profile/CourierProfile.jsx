@@ -4,7 +4,16 @@ import profileLogo from '../../img/profileLogo.svg'
 import closeButton from '../../img/closeButton.svg'
 import salaryLogo from '../../img/salary.svg'
 
-const CourierProfile = ({item, setModalActive}) => {
+const CourierProfile = ({item, setModalActive, setFilter}) => {
+  const onAppointedClick = () => {
+    setFilter("Appointed");
+    setModalActive(false);
+  }
+  const onReadyClick = () => {
+    setFilter("Ready");
+    setModalActive(false);
+  }
+
   return (
     <>
       <div className={styles.employee__header}>
@@ -41,10 +50,14 @@ const CourierProfile = ({item, setModalActive}) => {
       </section>
       <section className={styles.order__information}>
         <div className={styles.order__type}>
-          <button className={styles.select}>
+          <button className={styles.select} onClick={()=>{ 
+            onAppointedClick();
+          }}>
             <span>Назначенные заказы</span>
           </button>
-          <button className={styles.select}>
+          <button className={styles.select} onClick={()=>{ 
+            onReadyClick();
+          }}>
             <span>Завершенные заказы</span>
           </button>
         </div>

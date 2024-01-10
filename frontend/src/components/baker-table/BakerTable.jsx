@@ -14,47 +14,57 @@ export const STATES = {
   'Доставка': styles.blue,
 }
 
-const BakerTable = ({ employee, stateFilter="" }) => {
+const BakerTable = ({employee, filter}) => {
   const [modalActive, setModalActive] = useState(false);
   const [orders, setOrders] = useState(null);
+  const [filteredOrders, setFilteredOrders] = useState(null);
   const [currentOrder, setCurrentOrder] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentStates, setCurrentStates] = useState([]);
-  let suitableOrders = orders;
+
   useEffect(() => {
     getBakerOrders(employee, setOrders);
   }, [employee]);
   
   useEffect(() => {
-    if (suitableOrders) {
-      setCurrentStates(suitableOrders.map(item => item.status));
+    if (orders) {
+      setFilteredOrders(orders);
     }
-  }, [suitableOrders]);
+  }, [orders]);
 
-  if (stateFilter === "Appointed" && orders!=null) {
-    const suitableStates = ["Готовится", "Доставка"]
-    suitableOrders = orders.filter(element => {
-      return element.status === suitableStates[0] || element.status === suitableStates[1];
-    })
-  }
-  else if (stateFilter === "Ready" && orders!=null) {
-    const suitableStates = ["Завершён", "Отменён"]
-    suitableOrders = orders.filter(element => {
-      return element.status === suitableStates[0] || element.status === suitableStates[1];
-    })
-  }
+  useEffect(() => {
+    if (filteredOrders) {
+      setCurrentStates(filteredOrders.map(item => item.status));
+    }
+  }, [filteredOrders]);
 
-  const rows = suitableOrders?.map((item, index) => (
+  useEffect(() => {
+    if (filter === "Appointed" && orders!=null) {
+      const suitableStates = ["Готовится", "Доставка"]
+      const suitableOrders = orders.filter(element => {
+        return element.status === suitableStates[0] || element.status === suitableStates[1];
+      });
+      setFilteredOrders(suitableOrders);
+    } else if (filter === "Ready" && orders!=null) {
+      const suitableStates = ["Завершён", "Отменён"]
+      const suitableOrders = orders.filter(element => {
+        return element.status === suitableStates[0] || element.status === suitableStates[1];
+      });
+      setFilteredOrders(suitableOrders);
+    }
+  }, [filter, orders]);
+
+  const rows = filteredOrders?.map((item, index) => (
     <tr key={item.id} className={styles.row} >
       <td>
-      <button className={styles.openButton} onClick={() => {
-          setModalActive(true);
-          setCurrentOrder(item);
-          setCurrentIndex(index);
-        }}
-      >
-        {item.id}
-      </button>
+        <button className={styles.openButton} onClick={() => {
+            setModalActive(true);
+            setCurrentOrder(item);
+            setCurrentIndex(index);
+          }}
+        >
+          {item.id}
+        </button>
       </td>
       <td className={styles.state}>
         <div className={STATES[currentStates[index]]}>{currentStates[index]}</div>

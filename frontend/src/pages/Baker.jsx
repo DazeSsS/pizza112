@@ -18,18 +18,14 @@ function Baker () {
     }
   }, [navigate]);
 
-  const setFilterState = (newFilter) => {
-    setFilter(newFilter);
-  }
-
   return (
     <>
       {!employee ? (
         <h2>Loading...</h2>
       ) : (
         <>
-          <Header view="baker" employee={employee} setFilterState={setFilterState}/>
-          <BakerTable employee={employee} stateFilter={filter}/>
+          <Header view="baker" employee={employee} setFilter={setFilter}/>
+          <BakerTable employee={employee} filter={filter}/>
         </>
       )}
     </>
