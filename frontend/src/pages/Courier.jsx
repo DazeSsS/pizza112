@@ -7,6 +7,7 @@ import { getCurrentUser } from '../utils/userData';
 
 function Courier () {
   const [employee, setEmployee] = useState(null);
+  const [filter, setFilter] = useState("");
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -23,8 +24,8 @@ function Courier () {
         <h2>Loading...</h2>
       ) : (
         <>
-          <Header view="courier" employee={employee}/>
-          <CourierTable employee={employee}/>
+          <Header view="courier" employee={employee} setFilter={setFilter}/>
+          <CourierTable employee={employee} filter={filter}/>
         </>
       )}
     </>

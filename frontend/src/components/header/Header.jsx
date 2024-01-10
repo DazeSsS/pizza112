@@ -12,7 +12,7 @@ import { deleteToken, getToken } from '../../utils/authToken';
 
 // У функции header теперь параметр view с 4 значениями: home, orders, employees, baker: с тремя хедерами для разных страничек
 
-const Header = ({view, employee}) => {
+const Header = ({view, employee, setFilter}) => {
   const [modalActive, setModalActive] = useState(false);
   const navigate = useNavigate();
 
@@ -87,7 +87,7 @@ const Header = ({view, employee}) => {
           <h1 className={styles.pageName}>Данные заказов</h1>
         </div>
         <Modal active={modalActive} setActive={setModalActive}>
-          <EmployeeCard item={employee} setModalActive={setModalActive}/>
+          <EmployeeCard item={employee} setModalActive={setModalActive} setFilter={setFilter}/>
         </Modal>
       </header>
     )
@@ -117,7 +117,7 @@ const Header = ({view, employee}) => {
           <h1 className={styles.courier__pageName}>Данные заказов</h1>
         </div>
         <Modal active={modalActive} setActive={setModalActive} size={"courier_profile"}>
-          <CourierProfile item={employee} setModalActive={setModalActive}/>
+          <CourierProfile item={employee} setModalActive={setModalActive} setFilter={setFilter}/>
         </Modal>
       </header>
     )

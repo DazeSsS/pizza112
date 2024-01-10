@@ -7,8 +7,9 @@ import { getCurrentUser } from '../utils/userData';
 
 function Baker () {
   const [employee, setEmployee] = useState(null);
+  const [filter, setFilter] = useState("");
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     if (getToken()){
       getCurrentUser(setEmployee);
@@ -16,15 +17,15 @@ function Baker () {
       navigate('/');
     }
   }, [navigate]);
-  
+
   return (
     <>
       {!employee ? (
         <h2>Loading...</h2>
       ) : (
         <>
-          <Header view="baker" employee={employee}/>
-          <BakerTable employee={employee}/>
+          <Header view="baker" employee={employee} setFilter={setFilter}/>
+          <BakerTable employee={employee} filter={filter}/>
         </>
       )}
     </>

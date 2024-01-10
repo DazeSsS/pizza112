@@ -14,9 +14,10 @@ export const STATES = {
   'Доставка': styles.blue,
 }
 
-const BakerTable = ({ employee }) => {
+const BakerTable = ({employee, filter}) => {
   const [modalActive, setModalActive] = useState(false);
   const [orders, setOrders] = useState(null);
+  const [filteredOrders, setFilteredOrders] = useState(null);
   const [currentOrder, setCurrentOrder] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentStates, setCurrentStates] = useState([]);
@@ -24,24 +25,46 @@ const BakerTable = ({ employee }) => {
   useEffect(() => {
     getBakerOrders(employee, setOrders);
   }, [employee]);
-
+  
   useEffect(() => {
     if (orders) {
-      setCurrentStates(orders.map(item => item.status));
+      setFilteredOrders(orders);
     }
   }, [orders]);
 
-  const rows = orders?.map((item, index) => (
-    <tr key={item.id} className={styles.row}>
+  useEffect(() => {
+    if (filteredOrders) {
+      setCurrentStates(filteredOrders.map(item => item.status));
+    }
+  }, [filteredOrders]);
+
+  useEffect(() => {
+    if (filter === "Appointed" && orders!=null) {
+      const suitableStates = ["Готовится", "Доставка"]
+      const suitableOrders = orders.filter(element => {
+        return element.status === suitableStates[0] || element.status === suitableStates[1];
+      });
+      setFilteredOrders(suitableOrders);
+    } else if (filter === "Ready" && orders!=null) {
+      const suitableStates = ["Завершён", "Отменён"]
+      const suitableOrders = orders.filter(element => {
+        return element.status === suitableStates[0] || element.status === suitableStates[1];
+      });
+      setFilteredOrders(suitableOrders);
+    }
+  }, [filter, orders]);
+
+  const rows = filteredOrders?.map((item, index) => (
+    <tr key={item.id} className={styles.row} >
       <td>
-      <button className={styles.openButton} onClick={() => {
-          setModalActive(true);
-          setCurrentOrder(item);
-          setCurrentIndex(index);
-        }}
-      >
-        {item.id}
-      </button>
+        <button className={styles.openButton} onClick={() => {
+            setModalActive(true);
+            setCurrentOrder(item);
+            setCurrentIndex(index);
+          }}
+        >
+          {item.id}
+        </button>
       </td>
       <td className={styles.state}>
         <div className={STATES[currentStates[index]]}>{currentStates[index]}</div>

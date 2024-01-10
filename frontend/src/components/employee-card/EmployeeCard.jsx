@@ -1,10 +1,21 @@
+/* eslint-disable no-restricted-globals */
 import React from 'react';
 import styles from './employeeCard.module.css'
 import profileLogo from '../../img/profileLogo.svg'
 import closeButton from '../../img/closeButton.svg'
 import salaryLogo from '../../img/salary.svg'
 
-const EmployeeCard = ({item, setModalActive}) => {
+
+const EmployeeCard = ({item, setModalActive, setFilter}) => {
+  const onAppointedClick = () => {
+    setFilter("Appointed");
+    setModalActive(false);
+  }
+  const onReadyClick = () => {
+    setFilter("Ready");
+    setModalActive(false);
+  }
+
   return (
     <>
       <div className={styles.employee__header}>
@@ -41,10 +52,14 @@ const EmployeeCard = ({item, setModalActive}) => {
       </section>
       <section className={styles.order__information}>
         <div className={styles.order__type}>
-          <button className={styles.select}>
+          <button id="appointedOrders" className={styles.select} onClick={()=>{ 
+            onAppointedClick();
+          }}>
             <span>Назначенные заказы</span>
           </button>
-          <button className={styles.select}>
+          <button id="readyOrders" className={styles.select} onClick={()=>{ 
+            onReadyClick();
+          }}>
             <span>Завершенные заказы</span>
           </button>
         </div>
