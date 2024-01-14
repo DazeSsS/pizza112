@@ -14,8 +14,6 @@ const EmployeeTable = () => {
     getEmployees(setEmployees);
   }, []);
 
-  console.log(employees);
-
   const rows = employees.map(item => {
     return <tr className={styles.row} key={item.id}>
       <td className={styles.employee__column}>

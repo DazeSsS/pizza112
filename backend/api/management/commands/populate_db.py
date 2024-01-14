@@ -6,7 +6,9 @@ import datetime
 
 first_day_preset = datetime.date(2023, 6, 5)
 last_day_preset = datetime.date(2024, 6, 5)
-due_preset = datetime.datetime(2023, 12, 6, 23, 59, 59)
+due_preset_1 = datetime.datetime(2023, 12, 6, 23, 59, 59)
+due_preset_2 = datetime.datetime(2023, 12, 6, 23, 59, 59)
+due_preset_3 = datetime.datetime(2023, 12, 6, 23, 59, 59)
 order_ready = datetime.time(17, 23, 11)
 order_delivered = datetime.time(18, 37, 12)
 birth_date_preset = datetime.date(2004, 6, 5)
@@ -38,7 +40,8 @@ class Command(BaseCommand):
             middle_name="",
             phone_number="+79602341343",
             role="Пекарь",
-            first_work_day=first_day_preset, last_work_day=last_day_preset,
+            first_work_day=first_day_preset,
+            last_work_day=last_day_preset,
             salary=30000,
             birth_date=birth_date_preset
         )
@@ -77,7 +80,7 @@ class Command(BaseCommand):
             first_name="Георгий",
             last_name="Горшков",
             middle_name="",
-            phone_number="+79622361345",
+            phone_number="+79232487234",
             role="Курьер",
             first_work_day=first_day_preset,
             last_work_day=last_day_preset,
@@ -92,7 +95,7 @@ class Command(BaseCommand):
             last_name="Карамолина",
             middle_name="",
             gender="Женский",
-            phone_number="+79622361345",
+            phone_number="+79378552731",
             role="Пекарь",
             first_work_day=first_day_preset,
             last_work_day=last_day_preset,
@@ -100,10 +103,11 @@ class Command(BaseCommand):
             birth_date=birth_date_preset2
         )
 
-        product_1 = Product.objects.create(product_name="pizza112", price=112)
-        product_2 = Product.objects.create(product_name="Пицца", price=300)
-        product_3 = Product.objects.create(product_name="Сладкие рофланы", price=228)
-        product_4 = Product.objects.create(product_name="Кега", price=50)
+        peperoni = Product.objects.create(product_name="Пицца пеперони", price=300)
+        hawai = Product.objects.create(product_name="Гавайская пицца", price=280)
+        margarita = Product.objects.create(product_name="Пицца маргарита", price=320)
+        mushroom = Product.objects.create(product_name="Грибная пицца", price=290)
+        cola = Product.objects.create(product_name="Кола", price=80)
 
         customer_1 = Customer.objects.create(phone_number="+79542281337", name="Артем", email="megaprikol0@urfu.me")
         customer_2 = Customer.objects.create(phone_number="+79552291338", name="Иван", email="megaprikol1@urfu.me")
@@ -117,8 +121,8 @@ class Command(BaseCommand):
             date=last_day_preset, 
             employee=employee_6,
             customer=customer_3, 
-            address='ш. Приколов, дом 228, кв. 54', 
-            order_due=due_preset, 
+            address='ул. Приколов, дом 283, кв. 54', 
+            order_due=due_preset_1, 
             total=730
         )
         order_2 = Order.objects.create(
@@ -128,7 +132,7 @@ class Command(BaseCommand):
             employee=employee_2, 
             customer=customer_2, 
             address='ул. Мира, дом 32, кв. 204', 
-            order_due=due_preset, 
+            order_due=due_preset_2, 
             total=1200, 
             courier=employee_3
         )
@@ -138,10 +142,10 @@ class Command(BaseCommand):
             delivered_time=order_delivered,
             delivery_type="Доставка", 
             date=last_day_preset, 
-            employee=employee_4, 
-            customer=customer_2, 
+            employee=employee_2, 
+            customer=customer_1, 
             address='ул. Сериализаторская, дом 1, кв. 2', 
-            order_due=due_preset, 
+            order_due=due_preset_3, 
             total=1200, 
             courier=employee_3
         )
@@ -152,9 +156,9 @@ class Command(BaseCommand):
             delivery_type="Доставка", 
             date=last_day_preset, 
             employee=employee_2, 
-            customer=customer_2, 
+            customer=customer_5, 
             address='ул. Нулл, дом 128, кв. 256', 
-            order_due=due_preset, 
+            order_due=due_preset_2, 
             total=1200, 
             courier=employee_3
         )
@@ -165,18 +169,19 @@ class Command(BaseCommand):
             delivery_type="Доставка",
             date=last_day_preset,
             employee=employee_4,
-            customer=customer_2,
+            customer=customer_4,
             address='ул. Нулл, дом 128, кв. 256', 
-            order_due=due_preset, 
+            order_due=due_preset_3, 
             total=1200, 
             courier=employee_3
         )
 
-        items_ordered_1 = ItemsOrdered.objects.create(order=order_1, product=product_2, amount=2)
-        items_ordered_2 = ItemsOrdered.objects.create(order=order_2, product=product_4, amount=5)
-        items_ordered_3 = ItemsOrdered.objects.create(order=order_3, product=product_1, amount=2)
-        items_ordered_4 = ItemsOrdered.objects.create(order=order_3, product=product_3, amount=5)
-        items_ordered_5 = ItemsOrdered.objects.create(order=order_4, product=product_4, amount=10)
+        items_ordered_1 = ItemsOrdered.objects.create(order=order_1, product=hawai, amount=2)
+        items_ordered_2 = ItemsOrdered.objects.create(order=order_2, product=peperoni, amount=5)
+        items_ordered_3 = ItemsOrdered.objects.create(order=order_3, product=mushroom, amount=2)
+        items_ordered_4 = ItemsOrdered.objects.create(order=order_3, product=margarita, amount=3)
+        items_ordered_5 = ItemsOrdered.objects.create(order=order_3, product=cola, amount=1)
+        items_ordered_6 = ItemsOrdered.objects.create(order=order_4, product=peperoni, amount=10)
 
     def handle(self, *args, **options):
          self._create_objects()
